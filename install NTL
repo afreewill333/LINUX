@@ -8,5 +8,7 @@ Step 2. download NTL, uncompress and cd into the directory ntl-XXX/src
         --------------------------------------------------------------
         $sudo make install
         --------------------------------------------------------------
+        fatal error: NTL/ZZ.h: No such file or directory
+        $sudo apt-get install libntl-dev
         
         This should install NTL into /usr/local
