@@ -1,0 +1,17 @@
+TestGMP.cpp
+Step 1. cd into the directory where TestGMP.cpp located.
+Step 2. $g++ -lgmp -lntl TestGMP.cpp
+        this will output a file a.out.
+Step 3. $./a.out
+        2^100 = 126765.........
+        _
+        _
+        // input 2 numubers, such as 45 and 67
+        3128
+        ---------------------------------------------------------
+        anoone@debian:~/Desktops ./a.out 
+        2^100 = 126765.........
+        45
+        67
+        3128
+        anoone@debian:~/Desktops 
