@@ -4,7 +4,7 @@ Step 2. download NTL, uncompress and cd into the directory ntl-XXX/src
         $cd ... ./ntl-XXX/src
         $./configure NTL_THREADS=on NTL_THREAD_BOOST=on NTL_EXCEPTIONS=on
         $make
-        $make install
+        //$make install
         --------------------------------------------------------------
         $sudo make install
         --------------------------------------------------------------
