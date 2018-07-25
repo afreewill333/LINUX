@@ -5,7 +5,7 @@ Step 2. download GMP, uncompress and cd into the directory gmp-XXX
         $./configure --prefix=/usr/local/gmp-6.1.2  (这里是指定安装目录)
         $make
         //$make check(need much time to run this)
-        $make install
+        //$make install
         --------------------------------------------------------------
         $sudo make install
         --------------------------------------------------------------
