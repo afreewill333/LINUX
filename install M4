@@ -1,0 +1,5 @@
+Step 1. download m4 from http://www.gnu.org/software/m4/m4.html
+Step 2. cd m4-X.X.XX
+        ./configure
+        make
+        sudo make install
