@@ -10,6 +10,8 @@ Step 2. download GMP from http://www.gmplib.org , uncompress and cd into the dir
         $sudo make install
         --------------------------------------------------------------
         $./configure --enable-cxx --prefix=/usr/local/gmp-6.1.2 CPPFLAGS=-fexceptions
+        $make
+        $sudo make install
         --------------------------------------------------------------
         fatal error:'gmp.h' file not found
         $sudo apt-get install libgmp3-dev
