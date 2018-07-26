@@ -1,0 +1,21 @@
+gcc: error trying to exec 'cclplus': execvp: No such file or directory
+
+这个错误是gcc和g++版本不兼容导致的，也有可能是安装完gcc没有安装g++
+ 
+首先安装gcc和g++及一些依赖包
+sudo apt-get install build-essential
+sudo apt-get install g++
+ 
+安装完成后使用 gcc -v 查看版本，然后使用g++ -v 查看版本，保证版本一致
+ 
+如果系统中安装有多个版本的gcc
+ 
+那么就需要ln一下，我的机器上边安装的是4.3的，所以执行命令如下
+ 
+sudo ln -sf g++-4.3 /usr/bin/g++ 
+sudo ln -sf g++-4.3 /usr/bin/i686-linux-gnu-g++
+sudo ln -sf gcc-4.3 /usr/bin/gcc
+sudo ln -sf gcov-4.3 /usr/bin/gcov
+sudo ln -sf gcc-4.3 /usr/bin/i686-linux-gnu-gcc
+ 
+然后编译，OK。
