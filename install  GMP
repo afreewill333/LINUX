@@ -7,6 +7,9 @@ Step 2. download GMP from http://www.gmplib.org , uncompress and cd into the dir
         $sudo make install
         --------------------------------------------------------------
         fatal error:'gmp.h' file not found
+        Solution: add the path where gmp.h file locates.
+        $g++ -lgmp -I/usr/local/gmp-6.1.2/include  test.cpp -o test
+
         $sudo apt-get install libgmp3-dev
         error:  about g++
         $sudo apt-get install g++
