@@ -1,6 +1,6 @@
 1. unzip each file
 
-2. papare
+2. preparation
 2.1. g++:  apt-get update apt-get install g++ 
 2.2. make: apt-get install make
 2.3. m4: apt-get install m4
