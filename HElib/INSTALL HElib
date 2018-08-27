@@ -1,0 +1,194 @@
+root@vultr:/home# cd HElib-master
+root@vultr:/home/HElib-master# cd src
+root@vultr:/home/HElib-master/src# make
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c NumbTh.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c timing.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c bluestein.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c PAlgebra.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c CModulus.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c FHEContext.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c IndexSet.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c DoubleCRT.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c FHE.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c KeySwitching.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c Ctxt.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c EncryptedArray.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c replicate.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c hypercube.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c matching.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c powerful.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c BenesNetwork.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c permutations.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c PermNetwork.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c OptimizePermutations.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c eqtesting.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c polyEval.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c extractDigits.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c EvalMap.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c recryption.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c debugging.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c matmul.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c intraSlot.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c binaryArith.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c binaryCompare.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c tableLookup.cpp
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -c binio.cpp
+ar rv fhe.a NumbTh.o timing.o bluestein.o PAlgebra.o  CModulus.o FHEContext.o IndexSet.o DoubleCRT.o FHE.o KeySwitching.o Ctxt.o EncryptedArray.o replicate.o hypercube.o matching.o powerful.o BenesNetwork.o permutations.o PermNetwork.o OptimizePermutations.o eqtesting.o polyEval.o extractDigits.o EvalMap.o recryption.o debugging.o matmul.o intraSlot.o binaryArith.o binaryCompare.o tableLookup.o binio.o
+ar: creating fhe.a
+a - NumbTh.o
+a - timing.o
+a - bluestein.o
+a - PAlgebra.o
+a - CModulus.o
+a - FHEContext.o
+a - IndexSet.o
+a - DoubleCRT.o
+a - FHE.o
+a - KeySwitching.o
+a - Ctxt.o
+a - EncryptedArray.o
+a - replicate.o
+a - hypercube.o
+a - matching.o
+a - powerful.o
+a - BenesNetwork.o
+a - permutations.o
+a - PermNetwork.o
+a - OptimizePermutations.o
+a - eqtesting.o
+a - polyEval.o
+a - extractDigits.o
+a - EvalMap.o
+a - recryption.o
+a - debugging.o
+a - matmul.o
+a - intraSlot.o
+a - binaryArith.o
+a - binaryCompare.o
+a - tableLookup.o
+a - binio.o
+
+root@vultr:/home/HElib-master/src# make check
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+make check_General
+make[1]: Entering directory '/home/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -o Test_General_x Test_General.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
+./Test_General_x R=1 k=10 p=2 r=2 noPrint=1
+./Test_General_x: GOOD
+
+./Test_General_x R=1 k=10 p=2 d=2 noPrint=1
+./Test_General_x: GOOD
+
+./Test_General_x R=2 k=10 p=7 r=2 noPrint=1
+./Test_General_x: GOOD
+
+make[1]: Leaving directory '/home/HElib-master/src'
+make check_matmul
+make[1]: Entering directory '/home/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -o Test_matmul_x Test_matmul.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
+./Test_matmul_x m=18631 L=8 
+Nice!!
+
+./Test_matmul_x block=1 m=24295 gens="[16386 16427]" ords="[42 16]" L=8
+Killed
+Makefile:77: recipe for target 'check_matmul' failed
+make[1]: *** [check_matmul] Error 137
+make[1]: Leaving directory '/home/HElib-master/src'
+Makefile:57: recipe for target 'check' failed
+make: *** [check] Error 2
+root@vultr:/home/HElib-master/src# g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -o Test_General.out  Test_General.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
+root@vultr:/home/HElib-master/src# ./Test_General.out
+./Test_General.out: *** Bound N=6096, choosing m=7781, phi(m)=7500
+
+
+******** TestIt: R=1, p=2, r=1, d=1, c=2, k=80, w=64, L=6, m=7781, gens=[], ords=[]
+m = 7781, p = 2, phi(m) = 7500
+  ord(p)=50
+  generator 3 has order (!= Z_m^*) of 150
+
+security=186.298
+# ctxt primes = 3
+# bits in ctxt primes = 109
+# special primes = 2
+# bits in special primes = 73
+G = [0 1]
+*** round 0...
+  c1*=c0, level=3, log(noise/modulus)~-48.2275, p^r=2
+  c0+=k1, level=4, log(noise/modulus)~-65.0623, p^r=2
+  c2*=k2, level=4, log(noise/modulus)~-60.601, p^r=2
+  c2>>=69, level=3, log(noise/modulus)~-43.7662, p^r=2
+  c2+=tmp, level=3, log(noise/modulus)~-43.7662, p^r=2
+  c2>>>=-84, level=3, log(noise/modulus)~-38.9583, p^r=2
+  c1=-c1, level=3, log(noise/modulus)~-48.2275, p^r=2
+  c3*=c2, level=2, log(noise/modulus)~-32.4422, p^r=2
+  c0=-c3, level=2, log(noise/modulus)~-32.4422, p^r=2
+
+  BluesteinFFT: 0.375784 / 183 = 0.00205346   [bluestein.cpp:86]
+  CRT_reconstruct: 0.000102 / 2 = 5.1e-05   [PAlgebra.cpp:573]
+  Circuit: 0.722643 / 1 = 0.722643   [Test_General.cpp:128]
+  DoubleCRT: 0.190062 / 28 = 0.00678793   [DoubleCRT.cpp:376]
+  DoubleCRT: 0.019707 / 2 = 0.0098535   [DoubleCRT.cpp:421]
+  FFT: 0.278023 / 41 = 0.00678105   [DoubleCRT.cpp:48]
+  FFT: 0.019674 / 2 = 0.009837   [DoubleCRT.cpp:67]
+  FFT: 0.01964 / 9 = 0.00218222   [CModulus.cpp:271]
+  FFT: 0.277597 / 109 = 0.00254676   [CModulus.cpp:257]
+  FFT_remainder: 0.000479 / 9 = 5.32222e-05   [CModulus.cpp:276]
+  FFT_remainder: 0.040224 / 109 = 0.000369028   [CModulus.cpp:262]
+  KS_loop: 0.02947 / 13 = 0.00226692   [Ctxt.cpp:134]
+  KS_loop_1: 0.004025 / 13 = 0.000309615   [Ctxt.cpp:141]
+  KS_loop_2: 0.004605 / 13 = 0.000354231   [Ctxt.cpp:145]
+  KS_loop_3: 0.004043 / 13 = 0.000311   [Ctxt.cpp:150]
+  KS_loop_4: 0.001384 / 13 = 0.000106462   [Ctxt.cpp:154]
+  addCtxt: 0.002929 / 4 = 0.00073225   [Ctxt.cpp:633]
+  addPart: 0.007582 / 36 = 0.000210611   [Ctxt.cpp:544]
+  addPrimes: 0.184816 / 13 = 0.0142166   [DoubleCRT.cpp:316]
+  addPrimes_5: 0.18544 / 13 = 0.0142646   [DoubleCRT.cpp:299]
+  automorph: 0.002771 / 5 = 0.0005542   [Ctxt.cpp:946]
+  breakIntoDigits: 0.18613 / 7 = 0.02659   [DoubleCRT.cpp:285]
+  do_mul: 0.012159 / 42 = 0.0002895   [DoubleCRT.cpp:159]
+  embedInSlots: 0.000232 / 2 = 0.000116   [PAlgebra.cpp:513]
+  iFFT: 0.203995 / 65 = 0.00313838   [CModulus.cpp:287]
+  iFFT_division: 0.065394 / 65 = 0.00100606   [CModulus.cpp:341]
+  keySwitchPart: 0.217644 / 7 = 0.031092   [Ctxt.cpp:440]
+  modDownToSet: 0.435855 / 13 = 0.0335273   [Ctxt.cpp:278]
+  multByConstant: 0.008024 / 1 = 0.008024   [Ctxt.cpp:885]
+  multByConstant: 0.00284 / 4 = 0.00071   [Ctxt.cpp:867]
+  multiplyBy: 0.206112 / 2 = 0.103056   [Ctxt.cpp:790]
+  operator*=: 0.152552 / 2 = 0.076276   [Ctxt.cpp:743]
+  privateAssign: 0.001895 / 11 = 0.000172273   [Ctxt.cpp:231]
+  randomize: 0.013627 / 13 = 0.00104823   [DoubleCRT.cpp:889]
+  randomize_stream: 0.006852 / 1563 = 4.38388e-06   [DoubleCRT.cpp:916]
+  reLinearize: 0.370454 / 7 = 0.052922   [Ctxt.cpp:380]
+  rotate: 0.236968 / 1 = 0.236968   [EncryptedArray.cpp:171]
+  rotate1D: 0.236964 / 1 = 0.236964   [EncryptedArray.cpp:53]
+  shift: 0.106231 / 1 = 0.106231   [EncryptedArray.cpp:284]
+  shift1D: 0.106223 / 1 = 0.106223   [EncryptedArray.cpp:126]
+  smartAutomorph: 0.320179 / 3 = 0.106726   [Ctxt.cpp:971]
+  toPoly: 0.32876 / 39 = 0.00842974   [DoubleCRT.cpp:586]
+  toPoly_CRT: 0.108867 / 39 = 0.00279146   [DoubleCRT.cpp:639]
+  toPoly_FFT: 0.212028 / 39 = 0.00543662   [DoubleCRT.cpp:619]
+
+GOOD
+
+  BluesteinFFT: 0.026827 / 10 = 0.0026827   [bluestein.cpp:86]
+  Check: 0.119908 / 1 = 0.119908   [Test_General.cpp:213]
+  Decrypt: 0.071091 / 4 = 0.0177728   [FHE.cpp:766]
+  decode: 0.045498 / 4 = 0.0113745   [EncryptedArray.cpp:371]
+  do_mul: 0.00093 / 4 = 0.0002325   [DoubleCRT.cpp:159]
+  iFFT: 0.040532 / 10 = 0.0040532   [CModulus.cpp:287]
+  iFFT_division: 0.012697 / 10 = 0.0012697   [CModulus.cpp:341]
+  toPoly: 0.061846 / 4 = 0.0154615   [DoubleCRT.cpp:586]
+  toPoly_CRT: 0.019333 / 4 = 0.00483325   [DoubleCRT.cpp:639]
+  toPoly_FFT: 0.041804 / 4 = 0.010451   [DoubleCRT.cpp:619]
+
