@@ -13,3 +13,23 @@ root@vultr:/home# ./TESTntl.out
 45       (input 45)
 67       (input 67)
 3128   (output 3128)
+
+
+# Attention!
+root@vultr:/home# g++ -pthread TESTntl.cpp -o TESTntl.out -lntl -lgmp   (also work!)
+
+root@vultr:/home# g++ -pthread TESTntl.cpp -o TESTntl.out -lntl -lgmp   (cant work!)
+/tmp/cc9mYekk.o: In function `main':
+TESTntl.cpp:(.text+0x3c): undefined reference to `NTL::operator>>(std::istream&, NTL::ZZ&)'
+TESTntl.cpp:(.text+0x4f): undefined reference to `NTL::operator>>(std::istream&, NTL::ZZ&)'
+TESTntl.cpp:(.text+0xe0): undefined reference to `NTL::operator<<(std::ostream&, NTL::ZZ const&)'
+/tmp/cc9mYekk.o: In function `NTL::ZZ::Deleter::apply(_ntl_gbigint_body*)':
+TESTntl.cpp:(.text._ZN3NTL2ZZ7Deleter5applyEP17_ntl_gbigint_body[_ZN3NTL2ZZ7Deleter5applyEP17_ntl_gbigint_body]+0x14): undefined reference to `_ntl_gfree(_ntl_gbigint_body*)'
+/tmp/cc9mYekk.o: In function `NTL::ZZ::operator=(NTL::ZZ&&)':
+TESTntl.cpp:(.text._ZN3NTL2ZZaSEOS0_[_ZN3NTL2ZZaSEOS0_]+0x66): undefined reference to `_ntl_gcopy(_ntl_gbigint_body*, _ntl_gbigint_body**)'
+/tmp/cc9mYekk.o: In function `NTL::add(NTL::ZZ&, NTL::ZZ const&, long)':
+TESTntl.cpp:(.text._ZN3NTL3addERNS_2ZZERKS0_l[_ZN3NTL3addERNS_2ZZERKS0_l]+0x41): undefined reference to `_ntl_gsadd(_ntl_gbigint_body*, long, _ntl_gbigint_body**)'
+/tmp/cc9mYekk.o: In function `NTL::mul(NTL::ZZ&, NTL::ZZ const&, NTL::ZZ const&)':
+TESTntl.cpp:(.text._ZN3NTL3mulERNS_2ZZERKS0_S3_[_ZN3NTL3mulERNS_2ZZERKS0_S3_]+0x4e): undefined reference to `_ntl_gmul(_ntl_gbigint_body*, _ntl_gbigint_body*, _ntl_gbigint_body**)'
+collect2: error: ld returned 1 exit status
+
