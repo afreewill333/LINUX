@@ -1,0 +1,409 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0043)http://www.shoup.net/ntl/doc/tour-unix.html -->
+<HTML><HEAD><META content="IE=5.0000" http-equiv="X-UA-Compatible">
+ <TITLE>A Tour of NTL: Obtaining and Installing NTL for UNIX  </TITLE> 
+<META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<META name="GENERATOR" content="MSHTML 11.00.10570.1001"></HEAD> 
+<BODY>
+<CENTER><A href="http://www.shoup.net/ntl/doc/tour-modules.html"><IMG align="bottom" 
+alt="[Previous]" src="A%20Tour%20of%20NTL%20Obtaining%20and%20Installing%20NTL%20for%20UNIX_files/arrow1.gif"></A> 
+ <A href="http://www.shoup.net/ntl/doc/tour.html"><IMG align="bottom" alt="[Up]" 
+src="A%20Tour%20of%20NTL%20Obtaining%20and%20Installing%20NTL%20for%20UNIX_files/arrow2.gif"></A> 
+<A href="http://www.shoup.net/ntl/doc/tour-win.html"><IMG align="bottom" alt="[Next]" 
+src="A%20Tour%20of%20NTL%20Obtaining%20and%20Installing%20NTL%20for%20UNIX_files/arrow3.gif"></A> 
+</CENTER>
+<H1>
+<P align="center">A Tour of NTL: Obtaining and Installing NTL for UNIX  
+</P></H1>
+<P>
+<HR>
+
+<P>This procedure should work on most Unix or Unix-like platorms (including Mac 
+OS, and Windows with MinGW or Cygwin tools). 
+<P>To obtain the source code and documentation for NTL, <A href="http://www.shoup.net/ntl/download.html">
+download <TT>ntl-xxx.tar.gz</TT></A>, placing it a directory, and then, working 
+in this directory, do the following. Here, "<TT>xxx</TT>" denotes the current 
+version number. 
+<P>
+<PRE>   % gunzip ntl-xxx.tar.gz
+   % tar xf ntl-xxx.tar
+   % cd ntl-xxx/src
+   % ./configure 
+   % make
+   % make check
+   % sudo make install
+</PRE>
+This will build, test, and install NTL in  <TT>/usr/local</TT>. For this to 
+work, GMP must already be installed (most Unix distributions already come with 
+GMP installed, but see <A href="http://www.shoup.net/ntl/doc/tour-gmp.html">this 
+page</A> for more details). If you really do not want to use GMP, you can pass 
+the option <TT>NTL_GMP_LIP=off</TT> to <TT>configure</TT>; however, NTL will run 
+significantly faster with GMP, so this is strongly discouraged. 
+<P>After installation, you will find the NTL header files in 
+<TT>/usr/local/include/NTL</TT> and the compiled binary  in 
+<TT>/usr/local/lib/libntl.a</TT> (this is a <I>static</I> library -- if you want 
+a <I>shared</I> library, <A href="http://www.shoup.net/ntl/doc/tour-unix.html#shared">see 
+below</A>). Documentation is in <TT>/usr/local/share/doc</TT>, with the main 
+entry-point at <TT>/usr/local/share/doc/tour.html</TT>. 
+<P>If you want very high-performance for polynomial arithmetic over 
+<I>GF(2)</I>, you may want to consider using the <TT>gf2x</TT> library. To do 
+this, <TT>gf2x</TT> must already be installed. In addition, you should invoke 
+<TT>configure</TT> with the option <TT>NTL_GF2X_LIB=on</TT>. <A href="http://www.shoup.net/ntl/doc/tour-gf2x.html">This 
+page</A> provides more details.  
+<P>If you want to install NTL somewhere besides <TT>/usr/local</TT>, pass the 
+option <TT>PREFIX=/path/to/install/ntl</TT> to  <TT>configure</TT>. If you do 
+this, you may not need to run <TT>make install</TT> using <TT>sudo</TT>. If GMP 
+is installed somewhere besides <TT>/usr/local</TT>, pass the optopn  
+<TT>GMP_PREFIX=/path/to/gmp</TT> to <TT>configure</TT>. You can also pass 
+<TT>GF2X_PREFIX=/path/to/gf2x</TT> to <TT>configure</TT>, if <TT>gf2x</TT> is 
+installed somewhere besides <TT>/usr/local</TT>. 
+<P>As a shorthand, you pass the option  
+<TT>DEF_PREFIX=/path/to/all/software</TT>, which will override the default for 
+<TT>PREFIX</TT>, <TT>GMP_PREFIX</TT>, and <TT>GF2X_PREFIX</TT>. 
+<P>Now suppose you want to compile a program that uses NTL. Suppose you are 
+working in some arbitrary directory and <TT>foo.cpp</TT> is your program. Assume 
+that you have installed NTL in <TT>/usr/local</TT> as above. The following 
+should work: 
+<PRE>   % g++ -g -O2 -std=c++11 -pthread -march=native foo.cpp -o foo -lntl -lgmp -lm
+</PRE>
+<P>NOTES: 
+<OL>
+  <LI>By default, NTL is built in <TT>C++11</TT> mode, and  you will need to 
+  ensure that your compiler configured to accept <TT>C++11</TT>. This can 
+  usually be acomplished by passing <TT>-std=c++11</TT> to the compiler. Newer 
+  versions (6.1 or later) of GCC compile in <TT>C++14</TT> mode by default, so 
+  this may not be not necessary. This same option can be passed to other 
+  GCC-like compilers, such as CLANG  and Intel's ICC compiler. 
+  <LI>By default, NTL is built with multithreading enabled, and for this reason, 
+  you need to pass the <TT>-pthread</TT> option to GCC. This same option can be 
+  passed to other GCC-like compilers, such as CLANG  and Intel's ICC compiler. 
+  <LI>The <TT>-march=native</TT> option is usually a good idea to get best 
+  performance for code targeted to a specific x86 architecture. This same option 
+  can be passed to other compilers, like CLANG  and Intel's ICC compiler. 
+  <LI>You can look in the file <TT>/usr/local/include/NTL/ConfigLog.h</TT> to 
+  see what options (in addition to <TT>-g -O2</TT>) were chosen by NTL's 
+  configuration script. Look a line that looks like this: of  
+<PRE>   CXXAUTOFLAGS=" -std=c++11 -pthread -march=native"
+</PRE>
+  <LI>If you build NTL with <TT>gf2x</TT>, just add the option <TT>-lgf2x</TT> 
+  to the above, right after <TT>-lgmp</TT>. </LI></OL>
+<P>If you are working in the NTL <TT>src</TT> directory itself, you can just 
+run: 
+<PRE>   % make foo
+</PRE>to compile a program <TT>foo.cpp</TT>, as above. 
+<P>
+<H2>More Details </H2>
+<P>What follows is a more detailed description of the installation process. 
+<P><B>Step 1.</B> Extract the source files by executing: 
+<PRE>   % gunzip ntl-xxx.tar.gz
+   % tar xvf ntl-xxx.tar
+</PRE>On most systems, 
+the following shortcut works: 
+<PRE>   % tar xzvf ntl-xxx.tar.gz
+</PRE>
+<P>Note that this will unpack everything into a sub-directory <TT>ntl-xxx</TT>,
+ creating this directory if necessary. Next: 
+<PRE>   % cd ntl-xxx
+   % ls
+</PRE>You should see a file "<TT>README</TT>", and 
+directories  "<TT>include</TT>", "<TT>doc</TT>", and "<TT>src</TT>". The 
+directory "<TT>doc</TT>" contains all the documentation. The file 
+"<TT>doc/tour.html</TT>" contains a copy of the on-line documentation. The 
+directory "<TT>include</TT>"  contains all the header files within a 
+subdirectory "<TT>include/NTL</TT>". The directory "<TT>src</TT>" contains 
+everything else. Go there now: 
+<PRE>   % cd src
+</PRE>
+<P><B>Step 2.</B> Run the configuration script. 
+<P>Execute the command 
+<PRE>   % ./configure [ variable=value ]...
+</PRE>This configure script 
+generates the file "<TT>makefile</TT>" and the file
+ "<TT>../include/NTL/config.h</TT>", based upon the values assigned to the
+ variables on the command line. 
+<P>Here are the most important variables, and their default values. 
+<P>
+<PRE>
+CXX=g++              # The C++ compiler
+
+CXXFLAGS=-g -O2      # C++ complilation flags
+
+NATIVE=on            # Compiles code targeted to the current hardware (see below)
+TUNE=generic (or x86)# Performance-tuning switch (see below)
+
+DEF_PREFIX=/usr/local# Default software directory
+
+PREFIX=$(DEF_PREFIX) # Directory in which to install NTL library components
+SHARED=off           # Generate a shared library (as well as static -- see below)
+
+NTL_THREADS=on       # compile in thread-safe mode (see below)
+NTL_THREAD_BOOST=on  # compile with thread boosting enabled (see below)
+NTL_EXCEPTIONS=off   # compile with exceptions enabled (see below)
+
+NTL_GMP_LIP=on       # Switch to enable the use of GMP as primary 
+                     #   long integer package
+
+GMP_PREFIX=$(DEF_PREFIX) # Directory in which GMP components are installed
+
+NTL_GF2X_LIB=off     # Switch to enable the use of the gf2x package
+                     #   for faster arithmetic GF(2)[X]
+
+GF2X_PREFIX=$(DEF_PREFIX) # Directory in which gf2x components are installed
+
+NTL_STD_CXX11=on     # Build assuming C++11 features
+
+NTL_SAFE_VECTORS=on  # build in "safe vector" mode 
+
+
+</PRE>
+<P><I>Examples.</I> 
+<UL>
+  <LI>If you are happy with all the default values, run: 
+<PRE>   % ./configure
+</PRE>
+  <P></P>
+  <LI>If your C++ compiler is called <TT>icpc</TT> (i.e., the Intel <TT>C++</TT> 
+  compiler), run: 
+<PRE>   % ./configure CXX=icpc
+</PRE>
+  <P></P>
+  <LI>If you want to use, say, the options <TT>-g</TT>,  <TT>-O2</TT>, and 
+  <TT>-march=core-avx2</TT>, compiling <TT>C++</TT>, run: 
+<PRE>   % ./configure "CXXFLAGS=-g -O2 -march=core-avx2" 
+</PRE>Note that the 
+  conguration script will detect that you are passing an <TT>-march=XXX</TT> 
+  option through <TT>CXXFLAGS</TT>, and will therefore surpress the 
+  <TT>-march=native</TT> option. 
+  <P></P>
+  <LI>If you don't want thread safety, run: 
+<PRE>   % ./configure NTL_THREADS=off
+</PRE>This will also turn off thread 
+  boosting (see below), and you won't have to pass the option <TT>-pthread</TT>
+   through to compile your programs. 
+  <P></P>
+  <LI>If GMP was installed in   <TT>$HOME/sw</TT>, run: 
+<PRE>   % ./configure GMP_PREFIX=$HOME/sw
+</PRE>Go <A href="http://www.shoup.net/ntl/doc/tour-gmp.html">here</A> 
+  for complete details. 
+  <P></P>
+  <LI>If <A href="http://www.shoup.net/ntl/doc/tour-gf2x.html"><TT>gf2x</TT></A> 
+   is installed in a standard system directory, and you want to use it to obtain 
+  better performance for polynomial arithemtic over <I>GF(2)</I>,  run: 
+<PRE>   % ./configure NTL_GF2X_LIB=on
+</PRE>If <TT>gf2x</TT> was installed in  
+   <TT>$HOME/sw</TT>, run: 
+<PRE>   % ./configure NTL_GF2X_LIB=on GF2X_PREFIX=$HOME/sw
+</PRE>Go <A href="http://www.shoup.net/ntl/doc/tour-gf2x.html">here</A> 
+  for complete details. 
+  <P></P>
+  <LI>If you want to install NTL in the directory <TT>$HOME/sw</TT>, run: 
+<PRE>   % ./configure PREFIX=$HOME/sw
+</PRE></LI></UL>
+<P><I>Some magic.</I> The special makefile variable <TT>CXXAUTOFLAGS</TT> is 
+automagically set by the configuration script. These are <TT>C++</TT> compiler 
+flags that are selected depending on the choice of other configuration options. 
+ This is geared towards GCC, but should work pretty well for other compilers,
+ such as CLANG and ICC. The configuration script always tests that these flags 
+actually work, and prints out the flags that it chooses. If you explicitly set 
+<TT>CXXAUTOFLAGS</TT> when invoking the configuration script, then it will not 
+change that value. 
+<P>To set <TT>CXXAUTOFLAGS</TT> and for other checks,  the configure script 
+actually needs to run make. If you wish to use a non-standard make program for 
+this purpose, say <TT>gmake</TT>, set <TT>MAKE_PROG=gmake</TT>. 
+<P><I>Going native.</I> If <TT>NATIVE=on</TT> (the default), then using the 
+<TT>CXXAUTOFLAGS</TT> mechanism, the flag <TT>-march=native</TT> gets passed to 
+the compiler (assuming the compiler accepts that flag). Some users may choose to 
+override this mechanism by setting <TT>NATIVE=off</TT>, since 
+<TT>-march=native</TT> can cause trouble in some environments. The default, 
+however, is <TT>NATIVE=on</TT>, because otherwise most users will end up not 
+benefiting from important optimizations. If you do opt to set 
+<TT>NATIVE=off</TT>, please consider adding more specific flags to 
+<TT>CXXFLAGS</TT>, such as  
+<UL>
+  <LI><TT>-mavx</TT> to enable AVX instructions, 
+  <LI><TT>-mavx2 -mfma</TT> to enable AVX2 and FMA instructions, 
+  <LI><TT>-mpclmul</TT> to enable the PCLMUL instruction. </LI></UL>These are by 
+far the most important instructions that NTL currently exploits, so they should 
+be enabled if at all possible.   Alternatively, you could add 
+<TT>-march=XXX</TT> to <TT>CXXFLAGS</TT> to enable instructions for a specific 
+ CPU type (e.g., <TT>XXX=core-avx2</TT> works for Haswell CPUs). Doing so will 
+automatically set <TT>NATIVE=off</TT>. 
+<P>The question of "fat builds" for NTL has occasionally come up. While that is 
+not possible at the moment, it should still be possible to build different 
+versions of NTL targeted for different micro-architectures. NTL's include files 
+generally do not depend on the micro-architecture, so it should be possible to 
+compile client code against a single set of header files, and then dynamically 
+link against  the approprate version of the library. 
+<P><I>Tuning options.</I> If <TT>TUNE=auto</TT>, then <TT>make</TT> will run a 
+performance-tuning "wizard" to set a number of fine-grained performance options.
+ This is highly recommended, as it will choose options that are  best suited to 
+your particular hardware and compiler; however, it can be a bit time consuming.
+ Alternatively, you can set <TT>TUNE</TT> to one of the following values. 
+<UL>
+  <LI><TT>generic</TT>: chooses options that should be OK for most platforms 
+  <LI><TT>x86</TT>: chooses options that should be well suited for most x86 
+  platforms </LI></UL>More choices may be added in the future. Right now, the 
+default is <TT>x86</TT> if the <TT>configure</TT> detects that is is running on 
+an x86 platform, and <TT>generic</TT> otherwise. 
+<P><I>Esoterica.</I> There are a number of more esoteric configuration variables 
+that can be set. See <A 
+href="http://www.shoup.net/ntl/doc/config.txt"><TT>config.txt</TT></A> for a 
+complete description. 
+<P><B>Step 3.</B> Execute <TT>make</TT>. 
+<P>Just type: 
+<PRE>   % make
+</PRE>
+<P>The build  process after this point is fully automatic. But here is a 
+description of what happens. 
+<P>
+<OL>
+  <LI>The makefile invokes <TT>make clobber</TT>, which gets rid of just about 
+  anything that was created by a previous run of make. 
+  <LI>The makefile  builds the file "<TT>../include/NTL/mach_desc.h</TT>", 
+   which defines some machine characteristics such as word size and 
+  floating-point precision. This is done by compiling and running a <TT>C++</TT> 
+  program called <TT>MakeDesc</TT> that figures out these characteristics on its
+   own, and prints some diagnostics to the terminal. 
+  <P></P>
+  <LI>Several scripts are run to obtain more information about your system 
+  (e.g., to find a timing function, a "getpid" function,  and to detect if 
+  things like Intel AVX intrinsics work). 
+  <P></P>
+  <LI>The file  "<TT>../include/NTL/gmp_aux.h</TT>" is generated for use with 
+  GMP. If not using GMP, this file is still created, but it is empty. 
+  <P></P>
+  <LI>If necessary, the compatbility of the <TT>gf2x</TT> library is verified. 
+  <P></P>
+  <LI>If <TT>TUNE=auto</TT>, the configuration wizard script is run. This script 
+  works in a sub-directory,  compiling several programs, and performing a number 
+  of timing experiments, in order to determine the optimal setting for a number 
+  of flags in the file <TT>../include/NTL/config.h</TT>. When the script 
+  finishes (it may take several minutes), you will be told what the wizard 
+  thinks are the best settings, and your <TT>config.h</TT> file will be 
+  automatically updated. Note that any flags you set in Step 2  will be in
+   effect while the wizard runs, and will be retained in the updated 
+  <TT>config.h</TT> file, with the exception of the flags 
+<PRE>   NTL_AVOID_BRANCHING NTL_SPMM_ULL NTL_FFT_LAZYMUL NTL_FFT_BIGTAB
+   NTL_GF2X_NOINLINE NTL_GF2X_ALTCODE NTL_GF2X_ALTCODE1 
+   NTL_TBL_REM NTL_CRT_ALTCODE NTL_CRT_ALTCODE_SMALL
+</PRE>
+  which are set by the wizard.  
+  <P></P>
+  <LI>The makefile will compile all the source files, and then create the 
+  library "<TT>ntl.a</TT>" in the current directory. </LI></OL>
+<P>
+<P><B>After NTL is built.</B> 
+<P>Executing <TT>make check</TT> runs a series of timing and test programs. It 
+is a good idea to run this to see if everything really went well. It may take a 
+few minutes. 
+<P>Executing <TT>make install</TT> copies a number of files to a directory 
+<TT>&lt;prefix&gt;</TT> that you specify by passing 
+<TT>PREFIX=&lt;prefix&gt;</TT> as an argument to <TT>configure</TT> at 
+configuration time. The default is <TT>/usr/local</TT>, so either you need root 
+ permissions, or you choose a <TT>&lt;prefix&gt;</TT> for which you have write 
+permission. The files <TT>../include/NTL/*</TT> are copied into 
+<TT>&lt;prefix&gt;/include/NTL</TT>. The file <TT>ntl.a</TT> is copied to 
+<TT>&lt;prefix&gt;/lib/libntl.a</TT>. The files <TT>../doc/*</TT> are copied 
+into <TT>&lt;prefix&gt;/share/doc/NTL</TT>. 
+<P>You can also "fine tune" the installation procedure further. See the <A href="http://www.shoup.net/ntl/doc/config.txt">configure 
+documentation</A> for details. 
+<P>To allow for the "staging area" trick that some package managers use, the 
+makefile uses a vatriable <TT>DESTDIR</TT> that is prepended to <TT>PREFIX</TT> 
+at installation time. So executing  
+<PRE>   % make install DESTDIR=/path/to/staging/area
+</PRE>will install the 
+components into the staging area. Note that <TT>DESTDIR</TT> is set to empty by 
+default, and is not set by the configure script.  
+<P>Executing <TT>make uninstall</TT> undoes <TT>make install</TT>. 
+<P>Executing <TT>make clobber</TT> essentially removes everything created by 
+<TT>make</TT>. 
+<P>Executing <TT>make clean</TT> will remove object files, but not  
+<TT>ntl.a</TT>. 
+<P>
+<H2><A name="shared">Building a Shared Library </A> </H2>
+<P>By default, the above installation procedure builds a <I>static</I> library 
+only. Static libraries are nice because the procedures for building and using 
+them are nearly identical across various flavors of Unix. However, static 
+libraries have their drawbacks, and sometimes it is desirable to build a 
+<I>shared</I> library. This can be done (in theory) by simply passing 
+<TT>SHARED=on</TT> to  NTL's <TT>configure</TT>. 
+<P>If you set <TT>SHARED=on</TT>, then behind the scenes, the procedure used by 
+the <TT>makefile</TT> changes a bit. In particular, the magical program 
+<TT>libtool</TT> is used to deal with all idiosyncracies of shared libraries. By 
+default, the <TT>makefile</TT> configures and uses its own <TT>libtool</TT> 
+script. You can override this behavior  by setting configuration variable 
+<TT>LIBTOOL</TT> to point to another version of <TT>libtool</TT>.   Note that if 
+<TT>SHARED=on</TT>, then  in addition to using the <TT>libtool</TT> program, the 
+<TT>makefile</TT> relies on features specific to GNU make. 
+<P>On Cygwin, you may need to set <TT>LIBTOOL_LINK_FLAGS=-no-undefined</TT> for 
+very  obscure reasons. 
+<P>Note that if you want to build NTL as a shared library, then (if you use 
+them) GMP and <TT>gf2x</TT> must also  be built and installed as shared 
+libraries. Also note that to use a shared library version of NTL, you may have 
+to do something special, like set a special shell variable:  the output 
+generated by the <TT>libtool</TT> program during <TT>make install</TT> should 
+give specific instructions. On many systems, you need to set the shell variable  
+<TT>LD_LIBRARY_PATH</TT> to a path that contains the directory where the shared 
+library is installed. In addition, if NTL is built as a shared library, then you 
+typically do not have to include <TT>-lgmp</TT> (if using GMP), or 
+<TT>-lgf2x</TT> (if using <TT>gf2x</TT>), or corresponding <TT>-L</TT> flags, or 
+<TT>-lm</TT>  on the command line when compiling programs that use NTL. 
+<P>
+<H2>Thread safety, thread boosting, and exception safety </H2>
+<P>By default, NTL currently compiles with multithreading enabled. In 
+particular, the configuration variables <TT>NTL_THREADS</TT> and 
+<TT>NTL_THREAD_BOOST</TT> are both "on" by default. With 
+<TT>NTL_THREADS=on</TT>, NTL is compiled in a thread safe manner. With 
+<TT>NTL_THREAD_BOOST=on</TT>,  NTL will make use of a thread pool to boost 
+performance. This also makes the same thread-boosting facility available to NTL 
+client code.  Turning off <TT>NTL_THREADS</TT> will also turn off  
+<TT>NTL_THREAD_BOOST</TT>. 
+<P>To provide multithreading safety and capabilities, NTL requires a  
+<TT>C++11</TT> compiler. Currently, the configure script will try to add 
+<TT>-std=c++11</TT> (if necessary)  and <TT>-pthread</TT> to 
+<TT>CXXAUTOFLAGS</TT>, as this is what GCC requires. 
+<P>Note that GMP is thread safe. 
+<P>Note that <TT>gf2x</TT> is thread safe starting from v1.2 of  <TT>gf2x</TT>.
+ The NTL build process will check that you have the right version of 
+<TT>gf2x</TT>. 
+<P>By default, NTL treats errors in a very old-fashioned way: by printing an 
+error message and aborting your program. However, you can override this behavior 
+ by configuring with <TT>NTL_EXCEPTIONS=on</TT>. This will make NTL throw an 
+exception instead of aborting. This feature also requires a <TT>C++11</TT> 
+compiler (and <TT>CXXAUTOFLAGS</TT> is adjusted appropriately). It is not 
+enabled by default because (a) most NTL clients probably don't need fancy 
+exception handling, and (b) there is a  small performance penalty for enabling 
+exceptions (mostly related to esoteric issues surrounding  "<TT>nothrow</TT> 
+move constructors" and vector reallocation, not to anything <I>directly</I> 
+related to exceptions). 
+<P><A href="http://www.shoup.net/ntl/doc/tour-impl.html#threadimpl">[See 
+here]</A>  for more details about thread safety and exceptions. 
+<P><A href="http://www.shoup.net/ntl/doc/BasicThreadPool.cpp.html">[See 
+here]</A> for more information about thread pools and thread boosting. 
+<P>
+<H2><A name="abi">32-bit and 64-bit ABIs </A> </H2>
+<P>An ABI (Application Binary Interface) defines the sizes of various  
+<TT>C</TT> data types. Typically, with a 32-bit ABI, int's and long's are 32 
+bits, while on a 64-bit ABI, int's are 32 bits and long's are 64 bits. Some 
+platforms  support both 64-bit and 32-bit ABI's; typically in such settings, the 
+64-bit ABI will yield much better performance, while the 32-bit ABI is available 
+for backward compatibility. On modern 64-bit platforms, the 64-bit ABI is 
+typically the default; otherwise, you may have to explicitly request it (e.g., 
+with GCC, pass the <TT>-m64</TT> flag to the compiler). 
+<P>If you are using NTL with either the GMP or <TT>gf2x</TT> libraries, then 
+these must be built with the same ABI as NTL. The installation script for GMP 
+will typically select the 64-bit ABI automatically if it is available. The 
+installation script for <TT>gf2x</TT> may need some hints. 
+<P>When compiling programs that use NTL, you must also ensure that the program 
+is compiled with the same ABI as NTL. 
+<P>
+<P>
+<P>
+<P>
+<CENTER><A href="http://www.shoup.net/ntl/doc/tour-modules.html"><IMG align="bottom" 
+alt="[Previous]" src="A%20Tour%20of%20NTL%20Obtaining%20and%20Installing%20NTL%20for%20UNIX_files/arrow1.gif"></A> 
+ <A href="http://www.shoup.net/ntl/doc/tour.html"><IMG align="bottom" alt="[Up]" 
+src="A%20Tour%20of%20NTL%20Obtaining%20and%20Installing%20NTL%20for%20UNIX_files/arrow2.gif"></A> 
+<A href="http://www.shoup.net/ntl/doc/tour-win.html"><IMG align="bottom" alt="[Next]" 
+src="A%20Tour%20of%20NTL%20Obtaining%20and%20Installing%20NTL%20for%20UNIX_files/arrow3.gif"></A> 
+</CENTER></BODY></HTML>
