@@ -1,0 +1,5 @@
+step 1. #apt-get install lzip
+step 2. #lzip -d xxx.tar.lz
+        get xxx.tar
+step 3. #tar -xvf xxx.tar
+done.
