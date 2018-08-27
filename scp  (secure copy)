@@ -2,3 +2,10 @@
 local file  >>>  local directory
 scp  initrd.img   root@45.32.28.231:root/home
 result: the file "initrd.img" in the same directory of home is copied to the local directory "root@45.32.28.231:root/home"
+
+
+
+#2
+can use scp just like cp when the sourcefile and targetfile/targetdirectory are both local file or directory
+scp initrd.img  home/ 
+after this line, the directory "home" has a copy of "initrd.img".
