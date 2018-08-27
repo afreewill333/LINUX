@@ -1,0 +1,4 @@
+#1
+local file  >>>  local directory
+scp  initrd.img   root@45.32.28.231:root/home
+result: the file "initrd.img" in the same directory of home is copied to the local directory "root@45.32.28.231:root/home"
