@@ -1,7 +1,19 @@
-﻿﻿
+"Help" >> "about..." >> click the KEY icon >> enter the registration data(below) >> click the "OK" button.
+Registration Data:
 FLASHFXPwQAOlhkgwQAAAAC6W5MNJwTnsl73nIraAU149tnCQS   
 0hmZU3GGBQG1FtoSp5x0mUgA7bFW0qr0fKk2KCA+v2CCrFbF+q   
 bmLvEjV+4JCAX+H/TBpG7pdEJ8IEW09ST8t60Poou/CTNhxGoz   
 1Ww0kiyHynU4fOmVK9gQZ5eeMxKzssnhKdor2ibc3OTo+WvErl   
 omRpMfd15+/2EA/SbxzdwKmX6ybVAYnLe4g3cheOEdD3YnxF5i   
 4NeTRw
+
+
+#Configure the SFTP
+"Sites" >> "Site Manager..." >> "New Site" >> "Site Name" = "VPSftp" then "OK" 
+>> Connection type: SFTP over SSH
+>> Address      IP Address of vps
+>> User name:   root
+>> Password:    password of vps
+>> "Apply"
+>> "Connect"
+done.
