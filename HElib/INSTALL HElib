@@ -1,0 +1,15 @@
+1. unzip each file
+
+2. papare
+2.1. g++:  apt-get update apt-get install g++ 
+2.2. make: apt-get install make
+2.3. m4: apt-get install m4
+
+3. install GMP as follows.
+3.1. Download GMP from http://www.gmplib.org
+3.2. uncompress and cd into the directory gmp-XXX
+3.3. On the command line:
+      ./configure
+      make
+      sudo make install
+ This should install GMP into /usr/local
