@@ -1,1 +1,7 @@
 remove a file
+
+rm -f -r {file-name}
+
+Where,
+-f: Forcefully remove file
+-r: Remove the contents of directories recursively
