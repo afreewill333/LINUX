@@ -18,7 +18,7 @@ root@vultr:/home# ./TESTntl.out
 # Attention!
 root@vultr:/home# g++ -pthread TESTntl.cpp -o TESTntl.out -lntl -lgmp   (also work!)
 
-root@vultr:/home# g++ -pthread TESTntl.cpp -o TESTntl.out -lntl -lgmp   (cant work!)
+root@vultr:/home# g++ -pthread -lntl -lgmp TESTntl.cpp -o TESTntl.out   (cant work!)
 /tmp/cc9mYekk.o: In function `main':
 TESTntl.cpp:(.text+0x3c): undefined reference to `NTL::operator>>(std::istream&, NTL::ZZ&)'
 TESTntl.cpp:(.text+0x4f): undefined reference to `NTL::operator>>(std::istream&, NTL::ZZ&)'
