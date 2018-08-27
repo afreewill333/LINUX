@@ -1,0 +1,15 @@
+1. Download NTL from http://www.shoup.net/ntl/
+2. Uncompress and cd into the directory ntl-XXX/src
+3. On the command line: 
+   root@vultr:/# ./configure NTL_THREADS=on NTL_THREAD_BOOST=on NTL_EXCEPTIONS=on
+   root@vultr:/# make
+   root@vultr:/# make install
+
+This should install NTL into /usr/local. 
+
+Test wetheve NTL is sucessful installed successfully or not.
+root@vultr:/home# g++ -g -O2 -std=c++11 -pthread -march=native TESTntl.cpp -o TESTntl.out  -lntl -lgmp -lm
+root@vultr:/home# ./TESTntl.out
+45       (input 45)
+67       (input 67)
+3128   (output 3128)
