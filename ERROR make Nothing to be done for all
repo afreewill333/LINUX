@@ -1,0 +1,12 @@
+make: Nothing to be done for `all' 解决方法
+
+1.这句提示是说明你已经编译好了，而且没有对代码进行任何改动。
+若想重新编译，可以先删除以前编译产生的目标文件：
+make clean
+然后再
+make
+ 
+2.出现这种情况解决方法：
+a.make clean 清除安装时留下的文件
+b.在运行一下ldconfig
+c.再make 可运行出结果
