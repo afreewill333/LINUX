@@ -1,8 +1,9 @@
-#1
+#1 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 start the server of vps, get IP Address and Password
 configure the FlashFXP(Version:5.4.0) to connect to vps(SFTP over SSH,IP Address,"root",Password)
 use flashftp to upload the files(HElib-master.zip,ntl-11.3.0.tar.gz,gmp-6.1.2.tar.lz) to vps
-#2
+
+#2 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 1. unzip each file
    XXX.tar.lz     >>>      install lzip(#apt-get install lzip or yum install lzip); lzip -d xxx.tar.lz; tar -xvf xxx.tar   
    XXX.zip        >>>      install zip(#yum install zip unzip  ); unzip HElib-master.zip
@@ -129,8 +130,9 @@ collect2: error: ld returned 1 exit status
       # yum install perl
       # ./configure ... ... ... ... ... ... ... ... ...
 
-==========================================================================================================================
-#3
+=============================================================
+
+#3  WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 HElib
 install HElib as follows.
 4.1. Download HElib from https://github.com/shaih/HElib
@@ -150,7 +152,7 @@ install HElib as follows.
      which will compile myprog.cpp and link in fhe.a and all required 
      support libraries, and create the executable myprog_x.
 
-===========================
+=============================================================
 root@vultr:/home/HElib-master/src# make check
 HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
 If you get compilation errors, try to add/remove -std=c++11 in Makefile
@@ -316,4 +318,4 @@ make[1]: Leaving directory '/home/HElib-master/src'
 Makefile:57: recipe for target 'check' failed
 make: *** [check] Error 2
 root@vultr:/home/HElib-master/src# 
-==========================================================================================================================
+=============================================================
