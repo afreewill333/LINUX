@@ -1,0 +1,25 @@
+#1
+$apt-get update  //done successfully
+$apt-get install x-window-system-core gdm
+Just replace your previous second command or line with this one:
+Previous commands:
+$apt-get update
+$apt-get install x-window-system-core gdm
+New working commands:
+$apt-get update
+$apt-get install x-window-system-core gdm3
+
+
+Gnome
+# apt-get install aptitude tasksel
+# tasksel install gnome-desktop --new-install
+KDE
+# apt-get install kde-standard
+XFCE
+# apt-get install xfce4 xfce4-goodies thunar-archive-plugin
+
+#2
+INSTALL TeamViewer
+teamviewer passwd 123456
+teamviewer info   # get ID
+teamviewer --daemon  start
