@@ -79,36 +79,52 @@ int main()
       # make install
      This should install NTL into /usr/local.
 4.4. Test whether NTL is successfully installed or not:
-GMPtest.cpp
+NTLtest.cpp
 =============================================================
-#include<iostream>
-#include<gmpxx.h>
+#include <NTL/ZZ.h>
 
 using namespace std;
+using namespace NTL;
 
 int main()
 {
-    mpz_class a;
-    //计算2的1000次方
-    a = 1;
-    for(int i = 0; i < 1000; i++)  a *= 2;
-    cout<<"2^1000 = "<<a<<endl;
+   ZZ a, b, c; 
 
-    //计算-12345*9876543210123456789
-    mpz_class b, c;
-    b = -12345;
-    c = "98765432100123456789";
-    cout<<"b * c = "<<b * c<<endl;
+   cin >> a; 
+   cin >> b; 
 
-    return 0;    
+   c = (a+1)*(b+1);
+   cout << c << "\n";
 
+   return 0;
 }
 =============================================================
-      # g++ -lgmp -lgmpxx  GMPtest.cpp
-      # ./a.out
-      # g++ GMPtest.cpp -o GMPtest.out -lgmpxx -lgmp
-      # ./GMPtest.out
+      # g++ -pthread NTLtest.cpp -o NTLtest.out -lntl -lgmp
+      # ./NTLtest.out
+      45       (input 45)
+      67       (input 67)
+      3128   (output 3128)      
       
+# Attention!
+
+root@vultr:/home# g++ -pthread TESTntl.cpp -o TESTntl.out -lntl -lgmp   (also work!)
+root@vultr:/home# g++ -pthread -lntl -lgmp TESTntl.cpp -o TESTntl.out   (cant work!)
+
+/tmp/cc9mYekk.o: In function `main':
+TESTntl.cpp:(.text+0x3c): undefined reference to `NTL::operator>>(std::istream&, NTL::ZZ&)'
+TESTntl.cpp:(.text+0x4f): undefined reference to `NTL::operator>>(std::istream&, NTL::ZZ&)'
+TESTntl.cpp:(.text+0xe0): undefined reference to `NTL::operator<<(std::ostream&, NTL::ZZ const&)'
+/tmp/cc9mYekk.o: In function `NTL::ZZ::Deleter::apply(_ntl_gbigint_body*)':
+TESTntl.cpp:(.text._ZN3NTL2ZZ7Deleter5applyEP17_ntl_gbigint_body[_ZN3NTL2ZZ7Deleter5applyEP17_ntl_gbigint_body]+0x14): undefined reference to `_ntl_gfree(_ntl_gbigint_body*)'
+/tmp/cc9mYekk.o: In function `NTL::ZZ::operator=(NTL::ZZ&&)':
+TESTntl.cpp:(.text._ZN3NTL2ZZaSEOS0_[_ZN3NTL2ZZaSEOS0_]+0x66): undefined reference to `_ntl_gcopy(_ntl_gbigint_body*, _ntl_gbigint_body**)'
+/tmp/cc9mYekk.o: In function `NTL::add(NTL::ZZ&, NTL::ZZ const&, long)':
+TESTntl.cpp:(.text._ZN3NTL3addERNS_2ZZERKS0_l[_ZN3NTL3addERNS_2ZZERKS0_l]+0x41): undefined reference to `_ntl_gsadd(_ntl_gbigint_body*, long, _ntl_gbigint_body**)'
+/tmp/cc9mYekk.o: In function `NTL::mul(NTL::ZZ&, NTL::ZZ const&, NTL::ZZ const&)':
+TESTntl.cpp:(.text._ZN3NTL3mulERNS_2ZZERKS0_S3_[_ZN3NTL3mulERNS_2ZZERKS0_S3_]+0x4e): undefined reference to `_ntl_gmul(_ntl_gbigint_body*, _ntl_gbigint_body*, _ntl_gbigint_body**)'
+collect2: error: ld returned 1 exit status
+
+-------------------------------------------------------------
       # ./configure: line 15: perl: command not found
       # yum install perl
       # ./configure ... ... ... ... ... ... ... ... ...
