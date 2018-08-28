@@ -1,0 +1,43 @@
+./GMPtest.out: error while loading shared libraries: libgmpxx.so.4: cannot open shared object file: No such file or directory
+
+这个问题产生原因是 新版本的Ubuntu 中使用的库文件是更新的版本的libtiff.so.4 ，而FSL中的默认使用的是libtiff.so.3的库，版本号不一致，导致程序启动不了。这个问题的解决的办法很简单。有两种方式，即做一个链接或者直接复制一下。
+复制：cd /usr/lib
+sudo cp libtiff.so.4 libtiff.so.3
+或者做一个链接：cd /usr/lib
+ln -s libtiff.so.4 libtiff.so.3
+其他类似的库文件错误，可以用同样的方法解决。
+
+
+ldconfig命令的用途主要是在默认搜寻目录/lib和/usr/lib以及动态库配置文件/etc/ld.so.conf内所列的目录下，搜索出可共享的动态链接库（格式如lib*.so*）,进而创建出动态装入程序(ld.so)所需的连接和缓存文件。缓存文件默认为/etc/ld.so.cache，此文件保存已排好序的动态链接库名字列表，为了让动态链接库为系统所共享，需运行动态链接库的管理命令ldconfig，此执行程序存放在/sbin目录下。
+ldconfig通常在系统启动时运行，而当用户安装了一个新的动态链接库时，就需要手工运行这个命令。
+
+在linux下运行可执行程序时，如果出现如下错误表示系统不知道xxx.so放在哪个目录下：
+        error while loading shared libraries: libgtest.so.0: cannot open shared object file: No such file or directory
+        可以用如下命令来查看可执行程序依赖的so及加载情况：
+        #ldd main.out
+            linux-vdso.so.1 =>  (0x00007fffd77ff000)
+            libgtest.so.0 => not found 
+            libgcc_s.so.1 => /lib/libgcc_s.so.1 (0x00007fc9cf0f1000)
+            libc.so.6 => /lib/libc.so.6 (0x00007fc9ced7f000)
+            libstdc++.so.6 => /usr/lib/libstdc++.so.6 (0x00007fc9cea72000)
+        这时候就要在/etc/ld.so.conf中加入xxx.so所在的目录。
+        一般而言，xxx.so会存放在/usr/local/lib这个目录下，当然也可以用如下命令来查看xxx.so所在目录：
+        #ldconfig -p|grep libgtest
+        解决办法有如下两种：
+        1.在终端执行如下命令：
+        #sudo bash -c 'echo /usr/local/lib >> /etc/ld.so.conf ' && sudo ldconfig
+        2.手动在/etc/ld.so.conf文件中加下如下内容：
+        在/etc/ld.so.conf中加入/usr/local/lib这一行，保存之后运行/sbin/ldconfig -v更新一下配置即可。
+
+        附注：
+            库文件在连接（静态库和共享库）和运行（仅限于使用共享库的程序）时被使用，其搜索路径是在系统中进行设置的。
+            一般 Linux 系统把/lib和/usr/lib两个目录作为默认的库搜索路径，所以使用这两个目录中的库时不需要进行设置搜索路径即可直接使用。
+            对于处于默认库搜索路径之外的库，需要将库的位置添加到库的搜索路径之中。设置库文件的搜索路径有下列两种方式，可任选其中一种使用：
+            1.修改环境变量LD_LIBRARY_PATH
+            在环境变量 LD_LIBRARY_PATH中指明库的搜索路径，比如：
+            #export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+            2.修改配置文件ld.so.conf
+            在/etc/ld.so.conf文件中添加库的搜索路径，具体方式如前面所示。
+            为了加快程序执行时对共享库的定位速度，避免使用搜索路径查找共享库的低效率，系统直接读取库列表文件/etc/ld.so.cache搜索路径。
+            /etc/ld.so.cache 是一个非文本的数据文件，不能直接编辑，它是根据/etc/ld.so.conf中设置的搜索路径，由/sbin/ldconfig命令将这些搜索路径下的共享库文件集中在一起而生成的。
+            ldconfig 命令要以root权限执行。
