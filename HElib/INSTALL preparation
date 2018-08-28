@@ -12,11 +12,41 @@ use flashftp to upload the files(HElib-master.zip,ntl-11.3.0.tar.gz,gmp-6.1.2.ta
 2.2. make: apt-get install make or yum install make
 2.3. m4: apt-get install m4 or yum install m4
 
-3. install GMP as follows.yum
+3. install GMP as follows.
 3.1. Download GMP from http://www.gmplib.org
 3.2. uncompress and cd into the directory gmp-XXX
+      # cd gmp-x.x.x
 3.3. On the command line:
-      ./configure
-      make
-      sudo make install
- This should install GMP into /usr/local
+      # ./configure --enable-cxx
+      # make
+      # make install
+     This should install GMP into /usr/local
+3.4. Test whether GMP is successfully installed or not:
+GMPtest.cpp
+=============================================================
+#include<iostream>
+#include<gmpxx.h>
+
+using namespace std;
+
+int main()
+{
+    mpz_class a;
+    //计算2的1000次方
+    a = 1;
+    for(int i = 0; i < 1000; i++)  a *= 2;
+    cout<<"2^1000 = "<<a<<endl;
+
+    //计算-12345*9876543210123456789
+    mpz_class b, c;
+    b = -12345;
+    c = "98765432100123456789";
+    cout<<"b * c = "<<b * c<<endl;
+
+    return 0;    
+
+}
+=============================================================
+      # g++ -lgmp -lgmpxx  GMPtest.cpp
+      # ./a.out
+=============================================================
