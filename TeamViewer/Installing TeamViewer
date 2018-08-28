@@ -1,0 +1,29 @@
+Installing TeamViewer
+Usually, you can install the package by double-clicking or right-clicking on it and select the package manager, e.g. Open with software installation, Open with GDebi package installer, Open with Ubuntu Software Center, or Open with QApt package installer.
+If you prefer the command line, just run
+
+# for DEB packages:
+apt install ./teamviewer_13.x.yyy_[arch].deb
+apt install ./teamviewer-host_13.x.yyy_[arch].deb
+
+# for RPM packages (use dnf if yum is not available):
+yum install ./teamviewer_13.x.yyy.[arch].rpm
+yum install ./teamviewer-host_13.x.yyy.[arch].rpm
+
+# for SUSE:
+zypper install ./teamviewer-suse_13.x.yyy.[arch].rpm
+zypper install ./teamviewer-host-suse_13.x.yyy.[arch].rpm
+
+How to install TeamViewer on Linux without graphical user interface
+
+teamviewer help       # list all available commands
+teamviewer info       # show TeamViewer ID
+teamviewer passwd     # set password
+teamviewer setup      # assign device to account
+If you assign a device to your account, you don't need to set a password. Just follow the setup assistent and your done. The device will then show up in your Computers & Contacts.
+ An example installation and setup would look like this:
+$ apt install ./teamviewer*.deb
+$ teamviewer setup
+Please enter your e-mail: mail@example.org
+Please enter your password: ******
+You have successfully added this computer to your Computers & Contacts.
