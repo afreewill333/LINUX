@@ -52,3 +52,46 @@ int main()
       # g++ GMPtest.cpp -o GMPtest.out -lgmpxx -lgmp
       # ./GMPtest.out
 =============================================================
+
+4. install NTL as follows.
+4.1. Download NTL from http://www.shoup.net/ntl/
+4.2. Uncompress and cd into the directory ntl-XXX/src
+      # cd ntl-x.x.x
+      # cd src
+4.3. On the command line:
+      # ./configure NTL_THREADS=on NTL_THREAD_BOOST=on NTL_EXCEPTIONS=on
+      # make
+      # make install
+     This should install NTL into /usr/local.
+4.4. Test whether NTL is successfully installed or not:
+GMPtest.cpp
+=============================================================
+#include<iostream>
+#include<gmpxx.h>
+
+using namespace std;
+
+int main()
+{
+    mpz_class a;
+    //计算2的1000次方
+    a = 1;
+    for(int i = 0; i < 1000; i++)  a *= 2;
+    cout<<"2^1000 = "<<a<<endl;
+
+    //计算-12345*9876543210123456789
+    mpz_class b, c;
+    b = -12345;
+    c = "98765432100123456789";
+    cout<<"b * c = "<<b * c<<endl;
+
+    return 0;    
+
+}
+=============================================================
+      # g++ -lgmp -lgmpxx  GMPtest.cpp
+      # ./a.out
+      # g++ GMPtest.cpp -o GMPtest.out -lgmpxx -lgmp
+      # ./GMPtest.out
+=============================================================
+
