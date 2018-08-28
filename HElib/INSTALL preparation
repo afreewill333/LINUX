@@ -128,7 +128,8 @@ collect2: error: ld returned 1 exit status
       # ./configure: line 15: perl: command not found
       # yum install perl
       # ./configure ... ... ... ... ... ... ... ... ...
-=============================================================
+
+==========================================================================================================================
 #3
 HElib
 install HElib as follows.
@@ -149,7 +150,7 @@ install HElib as follows.
      which will compile myprog.cpp and link in fhe.a and all required 
      support libraries, and create the executable myprog_x.
 
-
+===========================
 root@vultr:/home/HElib-master/src# make check
 HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
 If you get compilation errors, try to add/remove -std=c++11 in Makefile
@@ -190,26 +191,129 @@ make: *** [check] Error 2
 
 Take a look at the programs Test_*.cpp for examples of using HElib.
 
-4.4. Test whether NTL is successfully installed or not:
-NTLtest.cpp
-1. unzip each file
-   XXX.tar.lz     >>>      install lzip(#apt-get install lzip or yum install lzip); lzip -d xxx.tar.lz; tar -xvf xxx.tar   
-   XXX.zip        >>>      install zip(#yum install zip unzip  ); unzip HElib-master.zip
-   XXX.tar.gz     >>>      tar -xzvf ntl-11.3.0.tar.gz
-2. preparation
-2.1. g++:  apt-get update apt-get install g++ or yum update yum install gcc yum install gcc-c++  gcc -v  g++ -v
-2.2. make: apt-get install make or yum install make
-2.3. m4: apt-get install m4 or yum install m4
+root@vultr:/home# cd HElib-master
+root@vultr:/home/HElib-master# cd src
+root@vultr:/home/HElib-master/src# make check
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
 
-3. install GMP as follows.
-3.1. Download GMP from http://www.gmplib.org
-3.2. uncompress and cd into the directory gmp-XXX
-      # cd gmp-x.x.x
-3.3. On the command line:
-      # ./configure --enable-cxx
-      # make
-      # make install
-     This should install GMP into /usr/local
-3.4. Test whether GMP is successfully installed or not:
-GMPtest.cpp
-=============================================================
+make check_General
+make[1]: Entering directory '/home/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+./Test_General_x R=1 k=10 p=2 r=2 noPrint=1
+./Test_General_x: GOOD
+
+./Test_General_x R=1 k=10 p=2 d=2 noPrint=1
+./Test_General_x: GOOD
+
+./Test_General_x R=2 k=10 p=7 r=2 noPrint=1
+./Test_General_x: GOOD
+
+make[1]: Leaving directory '/home/HElib-master/src'
+make check_Permutations
+make[1]: Entering directory '/home/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+./Test_Permutations_x noPrint=1
+***Testing m=4369, p=2, depth=5
+GOOD
+GOOD
+GOOD
+make[1]: Leaving directory '/home/HElib-master/src'
+make check_PolyEval
+make[1]: Entering directory '/home/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+./Test_PolyEval_x p=7 r=2 d=34 noPrint=1
+ encrypted poly match, plaintext poly match
+ encrypted poly match, plaintext poly match
+make[1]: Leaving directory '/home/HElib-master/src'
+make check_Replicate
+make[1]: Entering directory '/home/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+./Test_Replicate_x m=1247 noPrint=1
+  Replicate test succeeded :)
+  replicateAll() succeeded :), total time=0.396 (42 vectors)
+
+make[1]: Leaving directory '/home/HElib-master/src'
+make check_EvalMap
+make[1]: Entering directory '/home/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+./Test_EvalMap_x mvec="[7 3 221]" gens="[3979 3095 3760]" ords="[6 2 -8]" noPrint=1
+EvalMap: GOOD
+EvalMap: GOOD
+make[1]: Leaving directory '/home/HElib-master/src'
+make check_extractDigits
+make[1]: Entering directory '/home/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+./Test_extractDigits_x m=2047 p=5 noPrint=1
+digit extraction successful
+
+make[1]: Leaving directory '/home/HElib-master/src'
+make check_bootstrapping
+make[1]: Entering directory '/home/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+./Test_bootstrapping_x noPrint=1 N=512
+  *** reCryption succeeds!!
+./Test_bootstrapping_x p=7 noPrint=1
+  *** reCryption succeeds!!
+make[1]: Leaving directory '/home/HElib-master/src'
+make check_ThinBootstrapping
+make[1]: Entering directory '/home/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+./Test_ThinBootstrapping_x noPrint=1 N=512
+GOOD
+./Test_ThinBootstrapping_x p=7 noPrint=1
+GOOD
+make[1]: Leaving directory '/home/HElib-master/src'
+make check_binaryArith
+make[1]: Entering directory '/home/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+./Test_binaryArith_x
+  *** testAdd PASS ***
+  *** testProduct PASS ***
+make[1]: Leaving directory '/home/HElib-master/src'
+make check_binaryCompare
+make[1]: Entering directory '/home/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+./Test_binaryCompare_x
+  *** testCompare PASS ***
+make[1]: Leaving directory '/home/HElib-master/src'
+make check_tableLookup
+make[1]: Entering directory '/home/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+./Test_tableLookup_x
+  *** testLookup PASS ***
+  *** testWritein PASS ***
+make[1]: Leaving directory '/home/HElib-master/src'
+make check_Test_Bin_IO_x
+make[1]: Entering directory '/home/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+make[1]: *** No rule to make target 'check_Test_Bin_IO_x'.  Stop.
+make[1]: Leaving directory '/home/HElib-master/src'
+Makefile:57: recipe for target 'check' failed
+make: *** [check] Error 2
+root@vultr:/home/HElib-master/src# 
+==========================================================================================================================
