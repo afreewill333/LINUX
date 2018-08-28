@@ -52,9 +52,20 @@ int main()
       # g++ GMPtest.cpp -o GMPtest.out -lgmpxx -lgmp
       # ./GMPtest.out
       
-      ./GMPtest.out: error while loading shared libraries: libgmpxx.so.4: cannot open shared object file: No such file or directory
+      # ./GMPtest.out: error while loading shared libraries: libgmpxx.so.4: cannot open shared object file: No such file or directory
       copy the files in "/usr/local/gmp-6.1.2/lib/" to "/usr/local/gmp-6.1.2/share/" and "/usr/local/gmp-6.1.2/share/info/"
       # ldconfig
+      
+      # ldd GMPtest.out
+	          linux-vdso.so.1 (0x00007ffd4a7f2000)
+	          libgmpxx.so.4 => /usr/local/lib/libgmpxx.so.4 (0x00007f66c57de000)
+	          libgmp.so.10 => /usr/local/lib/libgmp.so.10 (0x00007f66c5568000)
+	          libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f66c51e6000)
+	          libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f66c4ee2000)
+	          libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f66c4ccb000)
+	          libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f66c492c000)
+	          /lib64/ld-linux-x86-64.so.2 (0x00007f66c5be7000)
+
 =============================================================
 
 4. install NTL as follows.
