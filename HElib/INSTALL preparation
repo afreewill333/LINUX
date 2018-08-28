@@ -5,7 +5,8 @@ use flashftp to upload the files(HElib-master.zip,ntl-11.3.0.tar.gz,gmp-6.1.2.ta
 #2
 1. unzip each file
    XXX.tar.lz     >>>      install lzip(#apt-get install lzip or yum install lzip); lzip -d xxx.tar.lz; tar -xvf xxx.tar   
-   XXX.zip        >>>      install zip(#yum install zip unzip  );
+   XXX.zip        >>>      install zip(#yum install zip unzip  ); unzip HElib-master.zip
+   XXX.tar.gz     >>>      tar -xzvf ntl-11.3.0.tar.gz
 2. preparation
 2.1. g++:  apt-get update apt-get install g++ 
 2.2. make: apt-get install make
