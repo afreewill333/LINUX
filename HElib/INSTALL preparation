@@ -8,11 +8,11 @@ use flashftp to upload the files(HElib-master.zip,ntl-11.3.0.tar.gz,gmp-6.1.2.ta
    XXX.zip        >>>      install zip(#yum install zip unzip  ); unzip HElib-master.zip
    XXX.tar.gz     >>>      tar -xzvf ntl-11.3.0.tar.gz
 2. preparation
-2.1. g++:  apt-get update apt-get install g++ 
+2.1. g++:  apt-get update apt-get install g++ or yum update yum install gcc yum install gcc-c++  gcc -v  g++ -v
 2.2. make: apt-get install make
 2.3. m4: apt-get install m4
 
-3. install GMP as follows.
+3. install GMP as follows.yum
 3.1. Download GMP from http://www.gmplib.org
 3.2. uncompress and cd into the directory gmp-XXX
 3.3. On the command line:
