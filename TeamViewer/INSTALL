@@ -1,14 +1,7 @@
 #1
-$apt-get update  //done successfully
-$apt-get install x-window-system-core gdm
-Just replace your previous second command or line with this one:
-Previous commands:
-$apt-get update
-$apt-get install x-window-system-core gdm
 New working commands:
 $apt-get update
 $apt-get install x-window-system-core gdm3
-
 
 Gnome
 # apt-get install aptitude tasksel
@@ -19,7 +12,26 @@ XFCE
 # apt-get install xfce4 xfce4-goodies thunar-archive-plugin
 
 #2
-INSTALL TeamViewer
-teamviewer passwd 123456
-teamviewer info   # get ID
-teamviewer --daemon  start
+2.0 Add a new user
+root can not log in the GUI system, so need a new user
+    # adduser anoone
+2.1 Installing TeamViewer
+If you prefer the command line, just run
+    # for DEB packages:
+    apt install ./teamviewer_13.x.yyy_[arch].deb
+    apt install ./teamviewer-host_13.x.yyy_[arch].deb
+2.2 Set up TeamViewer
+    # teamviewer passwd 123456
+    # teamviewer info  (get the ID)
+NOW teamviewer is already running, need no more commands 
+============ done! ============
+2.3 Set up TeamViewer of Win10
+start the TeamViewer of Win10.
+
+
+# for RPM packages (use dnf if yum is not available):
+yum install ./teamviewer_13.x.yyy.[arch].rpm
+yum install ./teamviewer-host_13.x.yyy.[arch].rpm
+# for SUSE:
+zypper install ./teamviewer-suse_13.x.yyy.[arch].rpm
+zypper install ./teamviewer-host-suse_13.x.yyy.[arch].rpm
