@@ -60,6 +60,9 @@ int main()
       # cd src
 4.3. On the command line:
       # ./configure NTL_THREADS=on NTL_THREAD_BOOST=on NTL_EXCEPTIONS=on
+      ./configure: line 15: perl: command not found
+      # yum install perl
+      # ./configure NTL_THREADS=on NTL_THREAD_BOOST=on NTL_EXCEPTIONS=on
       # make
       # make install
      This should install NTL into /usr/local.
