@@ -1,0 +1,33 @@
+#0
+Win10
+
+#1
+open cmd with the root user
+输入命令查看状态：
+netsh int Teredo show state
+
+#2
+为保险起见，先关闭下，输入下命令：
+netsh interface Teredo set state disable
+
+#3
+输入下命令重新打开下：
+netsh int ter set state enterpriseclient
+
+#4
+再次输入netsh int Teredo show state再次确认下
+此时类型为enterpriseclient，已经成功。
+
+#5
+Test IP6
+ping -6 2001:19f0:6001:4769:5400:01ff:fea7:5ebf
+ping 2001:19f0:6001:4769:5400:01ff:fea7:5ebf
+
+#6
+Xshell, FlashFXP both work well! just like the normal operation.
+Even GMP, NTL and HElib can also be installed correctly!
+
+the installation with Shadowsocks still needs more debug.
+the vps with ipv6 can not access normal web files located in a place with ipv4.
+can download the files needed on advance and use FlashFXP to upload to the vps.
+Even ss is installed, still can not access google.com which has ipv6.
