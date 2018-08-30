@@ -1,0 +1,12 @@
+{
+	"server": "2001:19f0:6001:4a2f:5400:01ff:fea7:c25d",
+	"local_address": "127.0.0.1",
+	"local_port": 1080,
+	"port_password": {
+		"2018": "123456",
+		"2019": "123456"
+	},
+	"timeout": 300,
+	"method": "aes-256-cfb",
+	"fast_open": true
+}

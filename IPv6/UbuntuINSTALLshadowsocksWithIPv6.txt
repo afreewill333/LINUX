@@ -1,0 +1,113 @@
+Xshell 6 (Build 0095)
+
+Welcome to Ubuntu 18.04 LTS (GNU/Linux 4.15.0-23-generic x86_64)
+
+
+root@vultr:~# apt-get update
+
+Reading package lists... Done
+root@vultr:~# apt-get install python-pip
+
+Setting up python-pip (9.0.1-2.3~ubuntu1) ...
+root@vultr:~# pip install shadowsocks
+Collecting shadowsocks
+  Downloading https://files.pythonhosted.org/packages/02/1e/e3a5135255d06813aca6631da31768d44f63692480af3a1621818008eb4a/shadowsocks-2.8.2.tar.gz
+    Complete output from command python setup.py egg_info:
+    Traceback (most recent call last):
+      File "<string>", line 1, in <module>
+    ImportError: No module named setuptools
+    
+    ----------------------------------------
+Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-OP_g9I/shadowsocks/
+root@vultr:~# apt-get install build-essential
+
+Setting up build-essential (12.4ubuntu1) ...
+Processing triggers for libc-bin (2.27-3ubuntu1) ...
+
+root@vultr:/home# curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 1604k  100 1604k    0     0  7258k      0 --:--:-- --:--:-- --:--:-- 7258k
+root@vultr:/home# python get-pip.py
+Collecting pip
+  Downloading https://files.pythonhosted.org/packages/5f/25/e52d3f31441505a5f3af41213346e5b6c221c9e086a166f3703d2ddaf940/pip-18.0-py2.py3-none-any.whl (1.3MB)
+    100% |¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 1.3MB 6.2MB/s 
+Collecting setuptools
+  Downloading https://files.pythonhosted.org/packages/66/e8/570bb5ca88a8bcd2a1db9c6246bb66615750663ffaaeada95b04ffe74e12/setuptools-40.2.0-py2.py3-none-any.whl (568kB)
+    100% |¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 573kB 17.1MB/s 
+Collecting wheel
+  Downloading https://files.pythonhosted.org/packages/81/30/e935244ca6165187ae8be876b6316ae201b71485538ffac1d718843025a9/wheel-0.31.1-py2.py3-none-any.whl (41kB)
+    100% |¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 51kB 15.7MB/s 
+Installing collected packages: pip, setuptools, wheel
+  Found existing installation: pip 9.0.1
+    Uninstalling pip-9.0.1:
+      Successfully uninstalled pip-9.0.1
+Successfully installed pip-18.0 setuptools-40.2.0 wheel-0.31.1
+root@vultr:/home# pip install --upgrade pip
+-bash: /usr/bin/pip: No such file or directory
+
+root@vultr:/# which pip
+/usr/local/bin/pip
+root@vultr:/# pip
+-bash: /usr/bin/pip: No such file or directory
+root@vultr:/# type pip
+pip is hashed (/usr/bin/pip)
+root@vultr:/# hash -r
+
+root@vultr:/# pip install shadowsocks
+
+Successfully installed shadowsocks-2.8.2
+
+root@vultr:/# vi /etc/ssconfig6.json
+root@vultr:/# firewall-cmd --permanent --zone=public --add-port=443/tcp
+
+Command 'firewall-cmd' not found, but can be installed with:
+
+apt install firewalld
+
+root@vultr:/# apt-get install firewalld
+Reading package lists... Done
+
+root@vultr:/# firewall-cmd --permanent --zone=public --add-port=2018/tcp
+success
+root@vultr:/# firewall-cmd --permanent --zone=public --add-port=2019/tcp
+success
+root@vultr:/# firewall-cmd --reload
+success
+root@vultr:/# ssserver -c /etc/ssconfig6.json -d start --pid-file ss2.pid 
+INFO: loading config from /etc/ssconfig6.json
+2018-08-30 13:59:17 INFO     loading libcrypto from libcrypto.so.1.1
+Traceback (most recent call last):
+  File "/usr/local/bin/ssserver", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python2.7/dist-packages/shadowsocks/server.py", line 34, in main
+    config = shell.get_config(False)
+  File "/usr/local/lib/python2.7/dist-packages/shadowsocks/shell.py", line 262, in get_config
+    check_config(config, is_local)
+  File "/usr/local/lib/python2.7/dist-packages/shadowsocks/shell.py", line 124, in check_config
+    encrypt.try_cipher(config['password'], config['method'])
+  File "/usr/local/lib/python2.7/dist-packages/shadowsocks/encrypt.py", line 44, in try_cipher
+    Encryptor(key, method)
+  File "/usr/local/lib/python2.7/dist-packages/shadowsocks/encrypt.py", line 83, in __init__
+    random_string(self._method_info[1]))
+  File "/usr/local/lib/python2.7/dist-packages/shadowsocks/encrypt.py", line 109, in get_cipher
+    return m[2](method, key, iv, op)
+  File "/usr/local/lib/python2.7/dist-packages/shadowsocks/crypto/openssl.py", line 76, in __init__
+    load_openssl()
+  File "/usr/local/lib/python2.7/dist-packages/shadowsocks/crypto/openssl.py", line 52, in load_openssl
+    libcrypto.EVP_CIPHER_CTX_cleanup.argtypes = (c_void_p,)
+  File "/usr/lib/python2.7/ctypes/__init__.py", line 379, in __getattr__
+    func = self.__getitem__(name)
+  File "/usr/lib/python2.7/ctypes/__init__.py", line 384, in __getitem__
+    func = self._FuncPtr((name_or_ordinal, self))
+AttributeError: /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1: undefined symbol: EVP_CIPHER_CTX_cleanup
+
+The BUGS locates in :  /usr/local/lib/python2.7/dist-packages/shadowsocks/crypto/openssl.py
+
+root@vultr:/# ssserver -c /etc/ssconfig6.json -d start --pid-file ss2.pid 
+INFO: loading config from /etc/ssconfig6.json
+2018-08-30 14:00:59 INFO     loading libcrypto from libcrypto.so.1.1
+started
+root@vultr:/# 
+
+Because connection from ipv4 to ipv6 is unstable, sometime connection may die, then need to reconnection to vps and restart the ssserver.
