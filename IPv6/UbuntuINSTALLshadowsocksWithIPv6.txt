@@ -31,13 +31,13 @@ root@vultr:/home# curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 root@vultr:/home# python get-pip.py
 Collecting pip
   Downloading https://files.pythonhosted.org/packages/5f/25/e52d3f31441505a5f3af41213346e5b6c221c9e086a166f3703d2ddaf940/pip-18.0-py2.py3-none-any.whl (1.3MB)
-    100% |¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 1.3MB 6.2MB/s 
+    100% |Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬| 1.3MB 6.2MB/s 
 Collecting setuptools
   Downloading https://files.pythonhosted.org/packages/66/e8/570bb5ca88a8bcd2a1db9c6246bb66615750663ffaaeada95b04ffe74e12/setuptools-40.2.0-py2.py3-none-any.whl (568kB)
-    100% |¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 573kB 17.1MB/s 
+    100% |Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬| 573kB 17.1MB/s 
 Collecting wheel
   Downloading https://files.pythonhosted.org/packages/81/30/e935244ca6165187ae8be876b6316ae201b71485538ffac1d718843025a9/wheel-0.31.1-py2.py3-none-any.whl (41kB)
-    100% |¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 51kB 15.7MB/s 
+    100% |Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬Â¨â‚¬| 51kB 15.7MB/s 
 Installing collected packages: pip, setuptools, wheel
   Found existing installation: pip 9.0.1
     Uninstalling pip-9.0.1:
@@ -111,3 +111,5 @@ started
 root@vultr:/# 
 
 Because connection from ipv4 to ipv6 is unstable, sometime connection may die, then need to reconnection to vps and restart the ssserver.
+
+Give it some time!
