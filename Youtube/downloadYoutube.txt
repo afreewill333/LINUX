@@ -1,0 +1,8 @@
+Step 1. Install youtube-dl
+Step 2. # youtube-dl  youtubeURL
+Step 3. # youtube-dl -a youtubeURLs.txt
+
+
+https://github.com/rg3/youtube-dl/
+
+http://www.typemylife.com/use-vps-download-videos-from-youtube-upload-to-baidu-cloud/
