@@ -1,4 +1,4 @@
-Step 1. Install youtube-dl
+Step 1. Install youtube-dl     # apt-get install youtube-dl
 Step 2. # youtube-dl  youtubeURL
 Step 3. # youtube-dl -a youtubeURLs.txt
 
