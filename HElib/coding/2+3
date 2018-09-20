@@ -45,7 +45,7 @@ And this is it. If we check ptSum, we should see that it holds the value 5.
 To summarize, the initialization part might look intimidating, but after the context and the keys are created, the summation itself is simply done using the familiar += operator on the ciphertexts.
 Although this is a simple example, HElib allows us to do more advanced things that are needed for practical applications. Most of those can be found in the samples that come with HElib, so that’s a good next stop.
 
-Attention: put the main.cpp in the directory which fhe.a is in.
+Attention: put the main.cpp in the directory which fhe.a is in and copy the .h files (FHE.h ...) into this directory.
 # g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2  main.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
 # ./a.out
 Finding m...m = 16993
