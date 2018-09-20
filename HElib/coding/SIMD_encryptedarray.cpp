@@ -10,8 +10,8 @@ int main(int argc, char **argv)
     /* On our trusted system we generate a new key
      * (or read one in) and encrypt the secret data set.
      */
-    long m=0, p=100001651, r=1; // Native plaintext space
-                               // Computations will be 'modulo p'
+    long m=0, p=100001651, r=1; // Native plaintext space (p should be prime)
+                                // Computations will be 'modulo p'
     long L=16;          // Levels
     long c=3;           // Columns in key switching matrix
     long w=64;          // Hamming weight of secret key
