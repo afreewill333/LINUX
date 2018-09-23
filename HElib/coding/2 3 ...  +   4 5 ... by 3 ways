@@ -6,7 +6,7 @@
 #include <NTL/ZZ.h>
 #include <gmp.h>
 
-#define VEC_SIZE 144
+#define VEC_SIZE 144 // related to m,p,r; size 145 would result in error.
 
 void noPackingSum(long u[], long v[], long result[], FHESecKey sk, FHEPubKey pk)
 {
