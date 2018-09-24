@@ -1,0 +1,139 @@
+Scalar Product Using HElib
+September 27, 2016 Mateus S. H. Cruz Tutorialfhe, helib 
+Scalar product (also known as dot product or inner product) is a core operation in many algorithms, and this tutorial sketches how it can be implemented using HElib.
+Let’s assume that the input is two arrays of integers:  and . Although it’s the case in this example, the arrays do not need to be the same. The scalar product (denoted by the symbol ) can be found by multiplying each corresponding position of the arrays and summing the partial results:
+
+Let’s take a look at three methods to obtain the same result while working with ciphertexts. There may be other ways to do it, and the comments are open for suggestions.
+For all the methods, we assume that the initialization phase (parameters setup, creation of contexts and keys, etc) has been done.  that appears in the following code snippets refers to the size of the input arrays (), and the arrays are the same as in the example ( and ).
+In addition, note the plaintext space might make the result look different than the expected. For example, if the plaintext space is , then scalar product values greater than that will be reduced in order to fit in this range.
+The source code for the whole sample can be found in GitHub.
+Method 1
+The first method consists in encrypting each element of the array individually, so we have a vector of ciphertexts.
+// Vectors to hold the ciphertexts created from the elements of u and v
+std::vector<Ctxt> encU;
+std::vector<Ctxt> encV;
+ 
+// Each element is encrypted individually
+for (int i = 0; i < VEC_SIZE; i++) {
+    Ctxt tempU(pk);
+    pk.Encrypt(tempU, to_ZZX(u[i]));
+    encU.push_back(tempU);
+    Ctxt tempV(pk);
+    pk.Encrypt(tempV, to_ZZX(v[i]));
+    encV.push_back(tempV);
+}
+We then multiply these ciphertext vectors by multiplying the corresponding positions. The result is stored in the vector of ciphertexts of elements from  ().
+// Multiply the corresponding positions of vectors
+// Store the result in encU
+for (int i = 0; i < VEC_SIZE; i++) {
+    encU[i] *= encV[i];
+}
+The final step of the calculation is to sum the elements in  to obtain the value of the scalar product.
+// Sum all the elements in encU
+// Save the result in the first position of the vector
+for (int i = 1; i < VEC_SIZE; i++) {
+    encU[0] += encU[i];
+}
+If we decrypt the first element of , we should see that it holds the value .
+// Decrypt the first position, which holds the value of the scalar product
+// ZZX is a class from the NTL library that represents polynomials
+ZZX result;
+sk.Decrypt(result, encU[0]);
+ 
+return result[0];
+One of the drawbacks of this method is that it requires the individual encryption of the elements. This might require a lot of time depending on the size of the input arrays. To deal with situations like this, HElib offers ciphertext packing, which encrypts a whole array into just one ciphertext. I will not go over the theory or the details of ciphertext packing, but an introduction can be found in this presentation (the part about packing starts on slide 29).
+Method 2
+The second method will use ciphertext packing into coefficients. One way to think about it is to just imagine that the elements of the input arrays will be used as coefficients of a polynomial. So, still using the array , we obtain the polynomial .
+It is possible to find the inner product of two arrays that are represented as polynomials by just multiplying one by the “inverse form” of the other, and checking a specific coefficient which will have the scalar product value. I am not sure whether there’s a name for this “inverse form”, but supposing the polynomial  presented above, the “inverse form” would be . More details can be found in this answer. In this case, if we multiply the polynomials, we obtain the scalar product value in the the 4th coefficient:
+
+In the implementation, we use the ZZX class from the NTL library to represent the polynomials.
+// ZZX is a class for polynomials from the NTL library
+ZZX U, V;
+ 
+// Set the length of the polynomial u(x) and v(x)
+U.SetLength(VEC_SIZE);
+V.SetLength(VEC_SIZE);
+ 
+// Set the coefficients of the polynomials u(x) and v(x)
+// Note that the elements from v are "inverted" when encoded into the coefficients of v(x)
+ 
+for (int i = 0; i < VEC_SIZE; i++) {
+    SetCoeff(U, i, u[i]); // u(x) = 1 + 2x + 3x^2 + 4x^3
+    SetCoeff(V, (VEC_SIZE - 1) - i, v[i]); // v(x) = 4 + 3x + 2x^2 + 1x^3
+}
+After this, we encrypt the polynomials into one ciphertext each.
+// Ciphertexts that will hold the polynomials encrypted using public key pk
+Ctxt encU(pk);
+Ctxt encV(pk);
+ 
+// Encrypt the polynomials into the ciphertexts
+pk.Encrypt(encU, U);
+pk.Encrypt(encV, V);
+Although we are using ciphertext packing, the multiplication of the ciphertext is done in the regular way.
+// Multiply the ciphertexts and store the result in encU
+encU *= encV;
+After decrypting, the scalar product value will be in the th coefficient of the result.
+// Decrypt the multiplied ciphertext into a polynomial using the secret key sk
+ZZX result;
+sk.Decrypt(result, encU); 
+ 
+return result[VEC_SIZE - 1];
+This method saves time by avoiding the encryption of individual elements; thanks to ciphertext packing, all of them can be encrypted at once. However, we lose the ability to access each element individually.
+Method 3
+The third method also uses ciphertext packing, but using subfields instead of polynomials. We can keep imagining the vectors of ciphertexts when using this kind of packing. The difference is that instead of encrypting each position of the vector separately, the vector is encrypted as a whole.
+In terms of implementation, we use an auxiliary class from HElib: EncryptedArray. One thing to keep in mind is that the ciphertext vectors should have the same size as the EncryptedArray, which is ultimately determined by the initialization parameters. So, if the elements of the input arrays cannot fill the vector of ciphertexts, we can fill the rest of the vectors with 0 since it won’t change the value of the scalar product.
+// Create a helper object based on the context
+EncryptedArray ea(context, context.alMod.getFactorsOverZZ()[0]);
+ 
+// Create vectors from the values from the arrays
+// The vectors should have the same size as the EncryptedArray (ea.size),
+// so fill the other positions with 0. This won't affect the result.
+std::vector<long int> U(u, u + VEC_SIZE);
+std::vector<long int> V(v, v + VEC_SIZE);
+for (int i = VEC_SIZE; i < ea.size(); i++) {
+    U.push_back(0);
+    V.push_back(0);
+}
+The encryption is done in a way similar to the second method, but in this case we use the EncryptedArray in this process.
+// Ciphertexts that will hold the encrypted vectors
+Ctxt encU(pk);
+Ctxt encV(pk);
+ 
+// Encrypt the whole vector into one ciphertext using packing
+ea.encrypt(encU, pk, U);
+ea.encrypt(encV, pk, V);
+The multiplication of the ciphertexts is done in the usual manner, followed by the use of the convenient function  that sums all the elements and store the sum in all positions of the ciphertext (the implementation can be found with the EncryptedArray class).
+// Multiply ciphertexts and store the result in encU
+encU.multiplyBy(encV);
+ 
+// Use the totalSums functions to sum all the elements
+// The result will have the sum in all positions of the vector
+totalSums(ea, encU);
+After decryption, the scalar product value can be found in any position of the vector after  is used.
+// Decrypt the result (i.e., the scalar product value)
+ZZX result;
+sk.Decrypt(result, encU);
+ 
+return result[0];
+This method also avoids encrypting the elements individually, but it loses a bit of flexibility since we have to work with vectors having the same size as the EncryptedArray created.
+Performance Comparison
+A simple performance comparison between the three methods yields the following results:
+VEC_SIZE
+Method 1 (s)
+Method 2 (s)
+Method 3 (s)
+4
+0.75
+0.31
+1.72
+40
+5.70
+0.31
+1.70
+400
+53.74
+0.32
+1.68
+From this we can see that individually encrypting the elements (Method 1) doesn’t scale well because more elements will always require more encryption operations. On the other hand, the other methods present better performance for larger inputs because the whole arrays are encrypted at once.
+In particular, Method 2 is the best option among the three if we just want to calculate the scalar product. However, if other operations are also performed using ciphertexts, then Method 3 may be a better alternative. In any case, since both methods use ciphertext packing, it becomes more difficult to access the individual elements of the ciphertext.
+As mentioned before, the whole example can be found at GitHub, and comments are welcome regarding other methods or improvements to the presented ones.
