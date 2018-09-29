@@ -1,0 +1,146 @@
+root@vultr:~/HElib-master/src# make check
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+make check_General
+make[1]: Entering directory '/root/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -o Test_General_x Test_General.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
+./Test_General_x R=1 k=10 p=2 r=2 noPrint=1
+./Test_General_x: GOOD
+
+./Test_General_x R=1 k=10 p=2 d=2 noPrint=1
+./Test_General_x: GOOD
+
+./Test_General_x R=2 k=10 p=7 r=2 noPrint=1
+./Test_General_x: GOOD
+
+make[1]: Leaving directory '/root/HElib-master/src'
+make check_matmul
+make[1]: Entering directory '/root/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -o Test_matmul_x Test_matmul.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
+./Test_matmul_x m=18631 L=8 
+Nice!!
+
+./Test_matmul_x block=1 m=24295 gens="[16386 16427]" ords="[42 16]" L=8
+Nice!!
+
+make[1]: Leaving directory '/root/HElib-master/src'
+make check_Permutations
+make[1]: Entering directory '/root/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -o Test_Permutations_x Test_Permutations.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
+./Test_Permutations_x noPrint=1
+***Testing m=4369, p=2, depth=5
+GOOD
+GOOD
+GOOD
+make[1]: Leaving directory '/root/HElib-master/src'
+make check_PolyEval
+make[1]: Entering directory '/root/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -o Test_PolyEval_x Test_PolyEval.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
+./Test_PolyEval_x p=7 r=2 d=34 noPrint=1
+ encrypted poly match, plaintext poly match
+ encrypted poly match, plaintext poly match
+make[1]: Leaving directory '/root/HElib-master/src'
+make check_Replicate
+make[1]: Entering directory '/root/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -o Test_Replicate_x Test_Replicate.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
+./Test_Replicate_x m=1247 noPrint=1
+  Replicate test succeeded :)
+  replicateAll() succeeded :), total time=0.324 (42 vectors)
+
+make[1]: Leaving directory '/root/HElib-master/src'
+make check_EvalMap
+make[1]: Entering directory '/root/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -o Test_EvalMap_x Test_EvalMap.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
+./Test_EvalMap_x mvec="[7 3 221]" gens="[3979 3095 3760]" ords="[6 2 -8]" noPrint=1
+EvalMap: GOOD
+EvalMap: GOOD
+make[1]: Leaving directory '/root/HElib-master/src'
+make check_extractDigits
+make[1]: Entering directory '/root/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -o Test_extractDigits_x Test_extractDigits.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
+./Test_extractDigits_x m=2047 p=5 noPrint=1
+digit extraction successful
+
+make[1]: Leaving directory '/root/HElib-master/src'
+make check_bootstrapping
+make[1]: Entering directory '/root/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -o Test_bootstrapping_x Test_bootstrapping.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
+./Test_bootstrapping_x noPrint=1 N=512
+  *** reCryption succeeds!!
+./Test_bootstrapping_x p=7 noPrint=1
+  *** reCryption succeeds!!
+make[1]: Leaving directory '/root/HElib-master/src'
+make check_ThinBootstrapping
+make[1]: Entering directory '/root/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -o Test_ThinBootstrapping_x Test_ThinBootstrapping.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
+./Test_ThinBootstrapping_x noPrint=1 N=512
+GOOD
+./Test_ThinBootstrapping_x p=7 noPrint=1
+GOOD
+make[1]: Leaving directory '/root/HElib-master/src'
+make check_binaryArith
+make[1]: Entering directory '/root/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -o Test_binaryArith_x Test_binaryArith.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
+./Test_binaryArith_x
+  *** testAdd PASS ***
+  *** testProduct PASS ***
+make[1]: Leaving directory '/root/HElib-master/src'
+make check_binaryCompare
+make[1]: Entering directory '/root/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -o Test_binaryCompare_x Test_binaryCompare.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
+./Test_binaryCompare_x
+  *** testCompare PASS ***
+make[1]: Leaving directory '/root/HElib-master/src'
+make check_tableLookup
+make[1]: Entering directory '/root/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+g++ -g -O2 -std=c++11 -pthread -DFHE_THREADS -DFHE_BOOT_THREADS -fmax-errors=2 -o Test_tableLookup_x Test_tableLookup.cpp fhe.a -L/usr/local/lib -lntl -lgmp -lm
+./Test_tableLookup_x
+  *** testLookup PASS ***
+  *** testWritein PASS ***
+make[1]: Leaving directory '/root/HElib-master/src'
+make check_Test_Bin_IO_x
+make[1]: Entering directory '/root/HElib-master/src'
+HElib requires NTL version 10.0.0 or higher, see http://shoup.net/ntl
+If you get compilation errors, try to add/remove -std=c++11 in Makefile
+
+make[1]: *** No rule to make target 'check_Test_Bin_IO_x'.  Stop.
+make[1]: Leaving directory '/root/HElib-master/src'
+Makefile:57: recipe for target 'check' failed
+make: *** [check] Error 2
