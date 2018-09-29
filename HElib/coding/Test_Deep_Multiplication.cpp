@@ -37,11 +37,13 @@ int main(int argc, char **argv)
     /*** BEGIN INITIALIZATION ***/
     long m = 0;                   // Specific modulus
     long p = 2;           // Plaintext base [default=2], should be a prime number
-    long r = 7;                   // Lifting [default=1]
+    long r = 10;                   // Lifting [default=1]
 
-    const long LEVEL =5;         //  if LEVEL==3 then: c1*c2*c3 
+    const long LEVEL = 8;         //  if LEVEL==3 then: c1*c2*c3 
     //the final result should be less than p^r, otherwise result := result%(p^r)  Pay Attention To It!
-    long L = 7;                  // Number of levels in the modulus chain [default=heuristic]
+    //the selection of L is probably related to the choice of p and r !
+    //L += 2[ 3rlog_2^p/FHE_p2Size ] + 1        Ring-Learning With Errors & HElib of Wenjie Lu
+    long L = 17;                  // Number of levels in the modulus chain [default=heuristic]
     long c = 3;                   // Number of columns in key-switching matrix [default=2]
     long hw= 64;                  // Hamming weight of secret key
     long d = 1;                   // Degree of the field extension [default=1]
