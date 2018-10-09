@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
 	fout.open("result.csv", ios::out);
 
 	string line;
+	int maxfloatdigits=0;
 	while(getline(fin, line))
 	{
 		string cell;
@@ -48,12 +49,16 @@ int main(int argc, char *argv[])
 				cout<<"<<<<<<<<<<<<<<<<<<<<<<";
 			cout<<endl;
 			fout<<cell<<",";
+
+			if(i!=0 && cell.size()-cell.find(".")-1>maxfloatdigits)
+				maxfloatdigits = cell.size()-cell.find(".")-1;
 		}
 
 		cout<<"++++++++++++++++++++++++++"<<endl;
 		fout<<endl;
 
 	}
+	cout<<"max float digits : "<<maxfloatdigits<<endl;
 
 	fout.close();
 
