@@ -9,22 +9,52 @@
 
 using namespace std;
 
-// double d =50.01234567891230;
-// countfloat( d-(int)d );
-int countfloat(double d)
+vector<vector<double>> matmult(const vector<vector<double>> a, const vector<vector<double>> b)
 {
-	stringstream ss;
-	ss.unsetf ( std::ios::floatfield );  // floatfield not set
-	ss.precision(12);
-	ss << d << '\n';
+	// MAT[M][N] :  M rows, N columns
+	int aM = a.size();
+	int aN = a[0].size();
+	int bM = b.size();
+	int bN = b[0].size();
 
-	string res;
-	ss>>res;
-	//cout<<"#"<<res<<"#"<<endl;
+	if( aN != bM )
+	{
+		cout<<"ERROR happens in matmult(...)!"<<endl;
+		exit(0);
+	}
+
+	vector<vector<double>> result(aM);
+	for(int i=0;i<result.size();i++)
+		result[i].resize(bN);
 	
-	return res.size() - res.find(".") - 1;
-}
+	for(int i=0;i!=aM;i++)
+	{
+		for(int j=0;j!=bN;j++)
+		{
+			double temp = 0;
+			for(int k=0;k!=aN;k++)
+			{
+				temp += a[i][k]*b[k][j];
+			}
 
+			result[i][j] = temp;
+		}
+	}
+
+	return result;
+}
+void print(const vector<vector<double>> a)
+{
+	// MAT[M][N] :  M rows, N columns
+	int aM = a.size();
+	int aN = a[0].size();
+	for(int i=0;i!=aM;i++)
+	{
+		for(int j=0;j!=a[i].size();j++)
+			cout<<setw(7)<<a[i][j];
+		cout<<endl;
+	}
+}
 int main(int argc, char *argv[])
 {
 	ifstream fin;
@@ -115,9 +145,9 @@ int main(int argc, char *argv[])
 	cout<<"dataM.size() = "<<dataM.size()<<" / "<<data.size()<<endl;
 
 	//Step 4. Compute the vector of Weight
-	vector<double> w(30);
+	vector<double> d(30);
 	for(int i=0;i<30;i++)
-		w[i] = M_B[i] - M_M[i];
+		d[i] = M_B[i] - M_M[i];
 
 	//Step 5. Compute the mid-point of 2 Means.
 	vector<double> x0(30);
@@ -127,7 +157,7 @@ int main(int argc, char *argv[])
 	//Step 6. Compute the offset of classifer
 	double c = 0;
 	for(int i=0;i<30;i++)
-		c += w[i]*x0[i];
+		c += d[i]*x0[i];
 	cout<<"c = #"<<c<<"#"<<endl;
 
 	// ***** classification stage ***** 
@@ -174,7 +204,7 @@ int main(int argc, char *argv[])
 		for(int i=0;i<30;i++) line[i] = row[i];
 		double result = 0;
 		for(int i=0;i<30;i++)
-			result += w[i]*line[i];
+			result += d[i]*line[i];
 		result -= c;
 
 		cout<<setw(4)<<i<<"\t";
