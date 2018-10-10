@@ -1,9 +1,11 @@
 #include<cstdio>
+#include<vector>
 #include<string>
 #include<fstream>
 #include<iostream>
 #include<iomanip>
 #include<sstream>
+#include<iterator>
 
 using namespace std;
 
@@ -33,32 +35,61 @@ int main(int argc, char *argv[])
 	ofstream fout;
 	fout.open("result.csv", ios::out);
 
+	//Step 0. Get data 
+	vector<vector<double>> data;
+
 	string line;
-	int maxfloatdigits=0;
 	while(getline(fin, line))
 	{
+		vector<double> row(31);
+
 		string cell;
 		stringstream ss(line);
 		
-		string ID;
-		for(int i=0;i<32;i++)
+		getline(ss, cell, ',');
+		string ID = cell;
+
+		getline(ss, cell, ',');
+		string diagnosis = cell;
+		// SET  0 - Benign ; 1 - Malignant 
+		row[30] = (diagnosis=="B"? 0:1);
+
+		for(int i=0;i<30;i++)
 		{
 			getline(ss, cell, ',');
-			cout<<setw(15)<<cell<<"\t\t"<<cell.size()-cell.find(".")-1;
-			if(cell.size()-cell.find(".")-1>6)
-				cout<<"<<<<<<<<<<<<<<<<<<<<<<";
-			cout<<endl;
-			fout<<cell<<",";
 
-			if(i!=0 && cell.size()-cell.find(".")-1>maxfloatdigits)
-				maxfloatdigits = cell.size()-cell.find(".")-1;
+			double feature;
+			stringstream sss;
+			sss<<cell;
+			sss>>feature;
+			row[i] = feature;
+			
+			cout<<setw(15)<<cell<<endl;
+			fout<<cell<<",";
 		}
+
+		data.push_back(row);
 
 		cout<<"++++++++++++++++++++++++++"<<endl;
 		fout<<endl;
-
 	}
-	cout<<"max float digits : "<<maxfloatdigits<<endl;
+
+	//for(auto it=data[568].begin();it!=data[568].end();++it)
+	//	cout<<*it<<"\t";	
+
+	//Step 1. Enlarge features to Integers
+	//        Set factor = 1e7
+	for(int i=0;i!=data.size();i++)
+	{
+		for(int j=0;j!=data[i].size()-1;j++)
+			data[i][j] *= 1e7;
+	}
+
+	cout<<endl;
+	for(int j=0;j!=data[568].size();j++)
+		cout<<fixed<<data[568][j]<<"\t";
+	cout<<endl;
+
 
 	fout.close();
 
