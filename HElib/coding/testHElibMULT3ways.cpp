@@ -172,6 +172,8 @@ int main(int argc, char **argv)
     sk.Decrypt(result3, CU);
     std::cout << "HElib subfield packing decryption: " << "OK!" <<  std::endl;            
     ZZ method3Result = result3[0];
+	std::cout<<"METHOD 3: SCALAR PRODUCT USING HELIB WITHOUT PACKING         "<<t3.tillNow()<<std::endl;
+
 
     // Checking results
 	long res = 0;
