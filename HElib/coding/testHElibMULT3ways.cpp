@@ -91,6 +91,7 @@ int main(int argc, char **argv)
 
     for(int i=0; i<VEC_SIZE; i++){
 		encU[i] *= encV[i];
+		//encU[i].multiplyBy(encV[i]); // this way takes more time.
     }
 	for(int i=1; i<VEC_SIZE; i++){
 		encU[0] += encU[i];
@@ -157,20 +158,19 @@ int main(int argc, char **argv)
     // Encrypt the whole vector into one ciphertext using packing
     ea.encrypt(CU, pk, UU);
     ea.encrypt(CV, pk, VV);
-
-    std::cout << "HElib subfield packing encryption: " << "OK!" <<  std::endl;    
+    
     // Multiply ciphertexts and set the result to encU
 
-    CU.multiplyBy(CV);
+    CU.multiplyBy(CV);      // using reLineration
+	//CU *= CV;             // not using reLineration
+
     // Use the totalSums functions to sum all the elements
     // The result will have the sum in all positions of the vector
     totalSums(ea, CU);
-
-    std::cout << "HElib subfield packing sum: " << "OK!" <<  std::endl;        
+       
     // Decrypt the result(i.e., the scalar product value)
     ZZX result3;
-    sk.Decrypt(result3, CU);
-    std::cout << "HElib subfield packing decryption: " << "OK!" <<  std::endl;            
+    sk.Decrypt(result3, CU);            
     ZZ method3Result = result3[0];
 	std::cout<<"METHOD 3: SCALAR PRODUCT USING HELIB WITHOUT PACKING         "<<t3.tillNow()<<std::endl;
 
