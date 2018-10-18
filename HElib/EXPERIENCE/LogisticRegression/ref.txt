@@ -1,0 +1,2 @@
+https://ml-cheatsheet.readthedocs.io/en/latest/logistic_regression.html#types-of-logistic-regression
+
