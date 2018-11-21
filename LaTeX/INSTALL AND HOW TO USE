@@ -1,0 +1,25 @@
+#Step 1: Install latex
+         # apt update
+         # apt install texlive-full   latex-beamer
+         # apt install latex-cjk-all
+
+#Step 2: # vim test.tex
+
+#Step 3: Create latex files
+         # pdflatex test.tex
+         Check the .pdf file
+         # evince test.pdf  
+   
+#Step 4: Create test.dvi
+         # latex test.tex
+         Create test.pdf
+         #dvipdfm test.dvi
+         #dvipdfmx test.dvi
+         
+#Step 5: Create test.dvi
+         # latex test.tex
+         Create test.ps
+         # dvips -Ppdf test.dvi
+         # dvips -P pdf test.dvi
+         Create test.pdf
+         # ps2pdf test.ps
